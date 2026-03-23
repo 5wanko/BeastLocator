@@ -76,7 +76,6 @@ fun jsonEscape(value: String): String {
 }
 
 fun resolveLicenseMetadata(group: String, name: String): Triple<String, String, String> {
-    val coordinate = "$group:$name"
     return when {
         group.startsWith("androidx.") -> Triple(
             "Apache License 2.0",
@@ -260,12 +259,14 @@ android {
         buildConfig = true
     }
 
+    val appVersionName = "1.2.4-IntDev"
+
     defaultConfig {
         applicationId = "jp.linkserver.beastlocator"
         minSdk = 26 // 通常は26
         targetSdk = 34
         versionCode = 202603234   // 2026, 03, 23, 4(年、月、日、その日のうちの何個目)
-        versionName = "1.2.4-IntDev"
+        versionName = appVersionName
         buildConfigField("String", "REVISION_ID", "\"$revisionId\"")
     }
 

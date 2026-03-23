@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.setPadding
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -31,11 +32,11 @@ class AboutActivity : AppCompatActivity() {
             showDevChannelDescription(channelName)
         }
         findViewById<android.widget.FrameLayout>(R.id.aboutSimpleVersionCard).setOnClickListener {
-            showVersionDetailsDialog(versionName, versionCode)
+            showVersionDetailsDialog(versionName, versionCode, channelName)
         }
 
         findViewById<LinearLayout>(R.id.openOssLicensesCard).setOnClickListener {
-            startActivity(android.content.Intent(this, OssLicensesActivity::class.java))
+            startActivity(Intent(this, OssLicensesActivity::class.java))
         }
         findViewById<android.widget.Button>(R.id.aboutSupportSiteButton).setOnClickListener {
             openUrl(getString(R.string.about_support_site_url))
@@ -111,7 +112,7 @@ class AboutActivity : AppCompatActivity() {
         val normalized = channelName.trim()
         val messageResId = when {
             normalized.equals("IntDev", ignoreCase = true) -> R.string.about_dev_channel_desc_intdev
-            normalized.equals("Dev", ignoreCase = true) -> R.string.about_dev_channel_desc_dev
+            normalized.equals("Beta", ignoreCase = true) -> R.string.about_dev_channel_desc_dev
             normalized.equals("Stable", ignoreCase = true) -> R.string.about_dev_channel_desc_stable
             else -> R.string.about_dev_channel_desc_unknown
         }
@@ -122,16 +123,67 @@ class AboutActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun showVersionDetailsDialog(versionName: String, versionCode: Int) {
-        val message = getString(
+    private fun showVersionDetailsDialog(versionName: String, versionCode: Int, channelName: String) {
+        val isStable = channelName.equals("Stable", ignoreCase = true)
+        if (!isStable) {
+            val message = getString(
+                R.string.about_version_details_message,
+                versionName,
+                versionCode,
+                BuildConfig.REVISION_ID
+            )
+            MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.about_version_details_title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null)
+                .show()
+            return
+        }
+
+        val store = DestinationStore(this)
+        var tapCount = 0
+        val detailsLines = getString(
             R.string.about_version_details_message,
             versionName,
             versionCode,
             BuildConfig.REVISION_ID
-        )
+        ).split('\n')
+        val horizontalPadding = (24 * resources.displayMetrics.density).toInt()
+        val container = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(horizontalPadding)
+        }
+        val versionView = TextView(this).apply {
+            text = detailsLines.getOrElse(0) { "" }
+        }
+        val internalVersionView = TextView(this).apply {
+            text = detailsLines.getOrElse(1) { "" }
+        }
+        val buildNumberView = TextView(this).apply {
+            text = detailsLines.getOrElse(2) { "" }
+            isClickable = true
+            isFocusable = true
+            setOnClickListener {
+                tapCount += 1
+                if (tapCount >= 7) {
+                    store.setStableDebugMenuUnlockEnabled(true)
+                    Toast.makeText(
+                        this@AboutActivity,
+                        R.string.debug_toggle_show,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    tapCount = 0
+                }
+            }
+        }
+
+        container.addView(versionView)
+        container.addView(internalVersionView)
+        container.addView(buildNumberView)
+
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.about_version_details_title)
-            .setMessage(message)
+            .setView(container)
             .setPositiveButton(android.R.string.ok, null)
             .show()
     }
@@ -139,7 +191,7 @@ class AboutActivity : AppCompatActivity() {
     private fun resolveChannelLabel(channelName: String): String {
         return when {
             channelName.equals("IntDev", ignoreCase = true) -> getString(R.string.about_channel_label_intdev)
-            channelName.equals("Dev", ignoreCase = true) -> getString(R.string.about_channel_label_dev)
+            channelName.equals("Beta", ignoreCase = true) -> getString(R.string.about_channel_label_dev)
             channelName.equals("Stable", ignoreCase = true) -> getString(R.string.about_channel_label_stable)
             else -> getString(R.string.about_channel_label_dev)
         }

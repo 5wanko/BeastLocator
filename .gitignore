@@ -6,6 +6,17 @@
 # Local configuration
 local.properties
 
+# Additional local Gradle caches / artifacts
+.gradle-local/
+.gradle-user-home/
+.gradle-user-home-verify/
+.gradle-verify-home/
+.gradle-verify-project-cache/
+.tmp-gradle-home/
+build/
+app/build/
+*.apk
+
 # IDE (Android Studio / IntelliJ)
 .idea/
 *.iml
@@ -33,11 +44,4 @@ desktop.ini
 # Kotlin / Java cache artifacts
 *.class
 out/
-
-# Explicit project-local ignores
-.gradle/
-.gradle-user-home/
-.gradle-verify-home/
-build/
-app/build/
-local.properties
+生成APK/

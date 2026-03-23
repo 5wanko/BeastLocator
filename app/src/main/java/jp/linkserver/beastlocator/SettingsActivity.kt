@@ -26,6 +26,8 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var fixedDestinationValue: TextView
     private lateinit var debugRevisionValue: TextView
     private lateinit var debugDestinationValue: TextView
+    private lateinit var debugSection: LinearLayout
+    private lateinit var toggleDebugMenuButton: Button
     private lateinit var liveUpdateStartDistanceTitle: TextView
     private lateinit var liveUpdateStartDistanceHelp: TextView
     private lateinit var liveUpdateStartDistanceLabel: TextView
@@ -53,8 +55,8 @@ class SettingsActivity : AppCompatActivity() {
         val arrivalNotificationSwitch = findViewById<MaterialSwitch>(R.id.arrivalNotificationSwitch)
         val widgetBackgroundUpdateSwitch = findViewById<MaterialSwitch>(R.id.widgetBackgroundUpdateSwitch)
         val widgetBearingModeGroup = findViewById<RadioGroup>(R.id.widgetBearingModeGroup)
-        val toggleDebugMenuButton = findViewById<Button>(R.id.toggleDebugMenuButton)
-        val debugSection = findViewById<LinearLayout>(R.id.debugSection)
+        toggleDebugMenuButton = findViewById(R.id.toggleDebugMenuButton)
+        debugSection = findViewById(R.id.debugSection)
         val debugApproachButton = findViewById<Button>(R.id.debugApproachButton)
         val debugSetDistanceButton = findViewById<Button>(R.id.debugSetDistanceButton)
         val debugResetDistanceButton = findViewById<Button>(R.id.debugResetDistanceButton)
@@ -163,12 +165,7 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(android.content.Intent(this, AboutActivity::class.java))
         }
 
-        applyDebugMenuVisibility(debugSection, toggleDebugMenuButton, store.isDebugMenuVisible())
-        toggleDebugMenuButton.setOnClickListener {
-            val next = !store.isDebugMenuVisible()
-            store.setDebugMenuVisible(next)
-            applyDebugMenuVisibility(debugSection, toggleDebugMenuButton, next)
-        }
+        applyDebugMenuAccessPolicy()
 
         applyProviderSelection(providerGroup, store.getGeocodingProvider())
         providerGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -258,6 +255,11 @@ class SettingsActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.settingsBackButton).setOnClickListener {
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyDebugMenuAccessPolicy()
     }
 
     private fun showDebugDestinationInputDialog() {
@@ -512,6 +514,48 @@ class SettingsActivity : AppCompatActivity() {
         toggleButton.text = getString(
             if (visible) R.string.debug_toggle_hide else R.string.debug_toggle_show
         )
+    }
+
+    private fun applyDebugMenuAccessPolicy() {
+        val defaultDebugMenuEnabled = !isStableChannel()
+        val canAccessDebugMenuToggle =
+            defaultDebugMenuEnabled || store.isStableDebugMenuUnlockEnabled()
+        if (canAccessDebugMenuToggle) {
+            toggleDebugMenuButton.visibility = android.view.View.VISIBLE
+            applyDebugMenuVisibility(debugSection, toggleDebugMenuButton, store.isDebugMenuVisible())
+            toggleDebugMenuButton.setOnClickListener {
+                val next = !store.isDebugMenuVisible()
+                store.setDebugMenuVisible(next)
+                applyDebugMenuVisibility(debugSection, toggleDebugMenuButton, next)
+            }
+        } else {
+            store.setDebugMenuVisible(false)
+            applyDebugMenuVisibility(debugSection, toggleDebugMenuButton, false)
+            toggleDebugMenuButton.visibility = android.view.View.GONE
+            toggleDebugMenuButton.setOnClickListener(null)
+        }
+    }
+
+    private fun isStableChannel(): Boolean {
+        val versionName = resolveAppVersionName()
+
+        val hyphenPos = versionName.lastIndexOf('-')
+        if (hyphenPos > 0 && hyphenPos < versionName.length - 1) {
+            val channel = versionName.substring(hyphenPos + 1).trim().trim('(', ')')
+            return channel.equals("Stable", ignoreCase = true)
+        }
+
+        val dotPos = versionName.lastIndexOf('.')
+        if (dotPos > 0 && dotPos < versionName.length - 1) {
+            val rawChannel = versionName.substring(dotPos + 1).trim()
+            val hasChannelHint = rawChannel.any { it.isLetter() } ||
+                rawChannel.startsWith("(") || rawChannel.endsWith(")")
+            if (hasChannelHint) {
+                val channel = rawChannel.trim('(', ')', ' ')
+                return channel.equals("Stable", ignoreCase = true)
+            }
+        }
+        return false
     }
 
     private fun resolveAppVersionName(): String {
