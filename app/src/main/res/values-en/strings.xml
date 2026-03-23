@@ -94,6 +94,10 @@
     <string name="about_version_label">%1$s  v%2$s (%3$d)</string>
     <string name="about_dev_channel_title">Development Channel</string>
     <string name="about_dev_channel_dialog_title">Development Channel: %1$s</string>
+    <string name="about_dev_channel_value_intdev">Internal Testing Build</string>
+    <string name="about_dev_channel_value_beta">Beta Build</string>
+    <string name="about_dev_channel_value_stable">Stable Build</string>
+    <string name="about_dev_channel_value_unknown">Unknown</string>
     <string name="about_dev_channel_desc_intdev">IntDev is used for internal testing. It is only available to developers and selected members, and may include specification changes or unstable behavior. Includes a debug menu.</string>
     <string name="about_dev_channel_desc_dev">Beta is a pre-release version. It is published on GitHub and other platforms but may exhibit unstable behavior. Includes a debug menu.</string>
     <string name="about_dev_channel_desc_stable">Stable is the production version, released after thorough bug verification for reliable performance. Developer features have been removed.</string>

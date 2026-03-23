@@ -190,7 +190,12 @@ class AboutActivity : AppCompatActivity() {
 
     private fun resolveChannelLabel(channelName: String): String {
         val normalized = channelName.trim()
-        return normalized.ifBlank { "unknown" }
+        return when {
+            normalized.equals("IntDev", ignoreCase = true) -> getString(R.string.about_dev_channel_value_intdev)
+            normalized.equals("Beta", ignoreCase = true) -> getString(R.string.about_dev_channel_value_beta)
+            normalized.equals("Stable", ignoreCase = true) -> getString(R.string.about_dev_channel_value_stable)
+            else -> getString(R.string.about_dev_channel_value_unknown)
+        }
     }
 }
 

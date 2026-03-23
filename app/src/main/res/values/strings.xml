@@ -94,6 +94,10 @@
     <string name="about_version_label" translatable="false">%1$s  v%2$s (%3$d)</string>
     <string name="about_dev_channel_title">開発チャネル</string>
     <string name="about_dev_channel_dialog_title">開発チャネル: %1$s</string>
+    <string name="about_dev_channel_value_intdev">内部検証版</string>
+    <string name="about_dev_channel_value_beta">ベータ版</string>
+    <string name="about_dev_channel_value_stable">安定版</string>
+    <string name="about_dev_channel_value_unknown">不明</string>
     <string name="about_dev_channel_desc_intdev">IntDev は内部検証時に使用されます。開発者と一部のメンバーにのみ公開され、仕様変更や不安定な挙動が含まれる可能性があります。デバッグメニューが含まれています。</string>
     <string name="about_dev_channel_desc_dev">Beta はプレリリースのバージョンです。GitHubなどで公開されますが、不安定な挙動になる可能性があります。デバッグメニューが含まれています。</string>
     <string name="about_dev_channel_desc_stable">Stable は安定版で、すでにバグ検証などが十分に行われてから実装され、挙動が安定しています。開発者向け機能などは削除されています。</string>
