@@ -113,15 +113,10 @@
     <string name="about_support_twitter_url">https://x.com/Link_2011A</string>
     <string name="about_update_title">Update Info</string>
     <string name="about_update_latest_format">Current Version: %1$s (%2$d)</string>
-    <string name="about_update_notes">Latest Updates:\n• Improved Inm quote translations with help from Chinese Inm fans.\n• Other bug fixes</string>
+    <string name="about_update_notes">Latest Updates:\n• First pre-release\n• Removed unused features\n• Added Welcome page\n• Other bug fixes</string>
     <string name="oss_screen_title">Open Source Licenses</string>
     <string name="oss_button_open_url">Open URL</string>
     <string name="oss_button_show_text">Show Text</string>
-    <string name="oss_androidx_title">AndroidX (Core / AppCompat / Activity / ConstraintLayout)</string>
-    <string name="oss_material_title">Material Components for Android</string>
-    <string name="oss_kotlin_title">Kotlin Standard Library</string>
-    <string name="oss_google_title">Google Play services Location</string>
-    <string name="license_apache_2">Apache License 2.0</string>
     <string name="license_odbl">ODbL 1.0</string>
     <string name="license_google_terms">Google Play services Terms</string>
     <string name="license_apache_body">Apache License\nVersion 2.0, January 2004\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.</string>

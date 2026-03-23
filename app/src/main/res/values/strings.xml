@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">BeastLocator</string>
+    <string name="app_name" translatable="false">BeastLocator</string>
     <string name="settings">設定</string>
     <string name="settings_subtitle">通知表示やウィジェット設定を調整できます</string>
     <string name="arrow">方角矢印</string>
@@ -59,14 +59,14 @@
     <string name="distance_interval_sound_toggle_help">目的地まで一定の距離近づくたびに野獣の咆哮を再生します\n⚠️この音声は一時停止できないため、公共の場で鳴らないよう注意してください</string>
     <string name="distance_interval_sound_distance_title">再生する間隔</string>
     <string name="distance_interval_sound_distance_help">200m〜5kmの範囲で設定できます</string>
-    <string name="distance_interval_sound_distance_value_m">%1$d m</string>
-    <string name="distance_interval_sound_distance_value_km">%.1f km</string>
+    <string name="distance_interval_sound_distance_value_m" translatable="false">%1$d m</string>
+    <string name="distance_interval_sound_distance_value_km" translatable="false">%.1f km</string>
     <string name="distance_mask_button_content_description_on">距離表示の丸めをオフにする</string>
     <string name="distance_mask_button_content_description_off">距離表示の丸めをオンにする</string>
     <string name="live_update_start_distance_title">進捗表示を開始する距離</string>
     <string name="live_update_start_distance_help">200m〜5kmの範囲で設定できます</string>
-    <string name="live_update_start_distance_value_m">%1$d m</string>
-    <string name="live_update_start_distance_value_km">%.1f km</string>
+    <string name="live_update_start_distance_value_m" translatable="false">%1$d m</string>
+    <string name="live_update_start_distance_value_km" translatable="false">%.1f km</string>
     <string name="live_update_start_distance_unsupported">開始距離の設定は Android 16+ で利用できます</string>
     <string name="widget_settings_title">ウィジェット設定</string>
     <string name="widget_settings_help">ウィジェットの更新方法と方位表示</string>
@@ -91,7 +91,7 @@
     <string name="about_section_help">アプリ情報とオープンソースライセンスを表示します</string>
     <string name="about_section_open">表示する</string>
     <string name="about_screen_title">このアプリについて</string>
-    <string name="about_version_label">%1$s  v%2$s (%3$d)</string>
+    <string name="about_version_label" translatable="false">%1$s  v%2$s (%3$d)</string>
     <string name="about_dev_channel_title">開発チャネル</string>
     <string name="about_dev_channel_dialog_title">開発チャネル: %1$s</string>
     <string name="about_dev_channel_desc_intdev">IntDev は内部検証時に使用されます。開発者と一部のメンバーにのみ公開され、仕様変更や不安定な挙動が含まれる可能性があります。デバッグメニューが含まれています。</string>
@@ -99,7 +99,7 @@
     <string name="about_dev_channel_desc_stable">Stable は安定版で、すでにバグ検証などが十分に行われてから実装され、挙動が安定しています。開発者向け機能などは削除されています。</string>
     <string name="about_dev_channel_desc_unknown">このチャネルの説明は未登録です。</string>
     <string name="about_simple_version_title">バージョン</string>
-    <string name="about_simple_version_value">v%1$s</string>
+    <string name="about_simple_version_value" translatable="false">v%1$s</string>
     <string name="about_version_details_title">バージョン詳細</string>
     <string name="about_version_details_message">バージョン: %1$s\n内部バージョン番号: %2$d\nビルド番号: %3$s</string>
     <string name="about_oss_title">オープンソースライセンス</string>
@@ -109,22 +109,17 @@
     <string name="about_support_help">不具合報告や連絡先はこちら</string>
     <string name="about_support_open_site">サイトを開く</string>
     <string name="about_support_open_twitter">X (Twitter) を開く</string>
-    <string name="about_support_site_url">https://linkserver.jp/</string>
-    <string name="about_support_twitter_url">https://x.com/Link_2011A</string>
+    <string name="about_support_site_url" translatable="false">https://linkserver.jp/</string>
+    <string name="about_support_twitter_url" translatable="false">https://x.com/Link_2011A</string>
     <string name="about_update_title">更新情報</string>
     <string name="about_update_latest_format">現在のバージョン: %1$s (%2$d)</string>
-    <string name="about_update_notes">最新の更新内容:\n• プレリリース\n• 未使用の機能を削除\n• ウェルカムページを追加\n• その他のバグ修正</string>
+    <string name="about_update_notes">最新の更新内容:\n• 最初のプレリリース\n• 未使用の機能を削除\n• ウェルカムページを追加\n• その他のバグ修正</string>
     <string name="oss_screen_title">オープンソースライセンス</string>
     <string name="oss_button_open_url">URLを開く</string>
     <string name="oss_button_show_text">本文を表示</string>
-    <string name="oss_androidx_title">AndroidX (Core / AppCompat / Activity / ConstraintLayout)</string>
-    <string name="oss_material_title">Material Components for Android</string>
-    <string name="oss_kotlin_title">Kotlin Standard Library</string>
-    <string name="oss_google_title">Google Play services Location</string>
-    <string name="license_apache_2">Apache License 2.0</string>
-    <string name="license_odbl">ODbL 1.0</string>
+    <string name="license_odbl" translatable="false">ODbL 1.0</string>
     <string name="license_google_terms">Google Play services Terms</string>
-    <string name="license_apache_body">Apache License\nVersion 2.0, January 2004\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.</string>
+    <string name="license_apache_body" translatable="false">Apache License\nVersion 2.0, January 2004\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.</string>
     <string name="license_odbl_body">OpenStreetMap data is licensed under ODbL 1.0.\n\nYou must provide attribution to OpenStreetMap contributors.\nIf you publicly use a produced work based on this data, the attribution must remain visible.\nIf you publicly use a derivative database, share-alike obligations may apply.\n\nDetails: https://opendatacommons.org/licenses/odbl/1-0/\nAttribution guideline: https://www.openstreetmap.org/copyright</string>
     <string name="license_google_terms_body">Google Play services Location API is provided under Google Play services terms.\n\nThis is not distributed as a typical OSS license text in this app.\nPlease refer to Google\'s official terms and policies for details.</string>
     <string name="oss_open_failed">URLを開けませんでした</string>
@@ -155,23 +150,23 @@
     <string name="sound_playback_notification_body">バックグラウンドで音声を再生しています</string>
 
     <string name="widget_waiting_location">位置情報待機中</string>
-    <string name="widget_distance_placeholder">--</string>
+    <string name="widget_distance_placeholder" translatable="false">--</string>
     <string name="widget_arrival_short">到着</string>
-    <string name="widget_arrival_celebration">🎉</string>
+    <string name="widget_arrival_celebration" translatable="false">🎉</string>
     <string name="arrival_title">こ↑こ↓</string>
     <string name="arrival_name_placeholder">正解位置を確認中...</string>
     <string name="arrival_coords_placeholder">緯度 -- / 経度 --</string>
     <string name="arrival_coords_format">緯度 %1$.6f / 経度 %2$.6f</string>
     <string name="create_next_destination">到達状態をリセットする</string>
     <string name="screenshot_privacy_warning">⚠️画面のスクショを投稿する場合は、身バレ防止機能の使用を推奨します</string>
-    <string name="distance_masked_format_km">%1$d km</string>
+    <string name="distance_masked_format_km" translatable="false">%1$d km</string>
     <string name="widget_description_small">目的地までの方角と距離(2x1)</string>
     <string name="widget_description_large">目的地までの方角と距離(2x2)</string>
     <string name="debug_toggle_show">デバッグメニューを表示</string>
     <string name="debug_toggle_hide">デバッグメニューを非表示</string>
     <string name="debug_section_title">デバッグ</string>
     <string name="debug_revision_title">ビルド番号</string>
-    <string name="debug_revision_value">%1$s</string>
+    <string name="debug_revision_value" translatable="false">%1$s</string>
     <string name="debug_show_reached">現在のセッションを到達とする</string>
     <string name="debug_start_approach">到達進捗表示を開始</string>
     <string name="debug_start_approach_unsupported">到達進捗表示を開始 (Android 16+)</string>
