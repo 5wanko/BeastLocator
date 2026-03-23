@@ -63,7 +63,6 @@ class SettingsActivity : AppCompatActivity() {
         val debugEditDestinationButton = findViewById<Button>(R.id.debugEditDestinationButton)
         val debugResetDestinationButton = findViewById<Button>(R.id.debugResetDestinationButton)
         val debugCompassModeGroup = findViewById<RadioGroup>(R.id.debugCompassModeGroup)
-        val providerGroup = findViewById<RadioGroup>(R.id.geocoderProviderGroup)
 
         findViewById<TextView>(R.id.versionText).text =
             getString(R.string.version_format, resolveAppVersionName())
@@ -167,16 +166,6 @@ class SettingsActivity : AppCompatActivity() {
 
         applyDebugMenuAccessPolicy()
 
-        applyProviderSelection(providerGroup, store.getGeocodingProvider())
-        providerGroup.setOnCheckedChangeListener { _, checkedId ->
-            val provider = when (checkedId) {
-                R.id.providerPhoton -> GeocodingProvider.PHOTON
-                R.id.providerNominatim -> GeocodingProvider.NOMINATIM
-                else -> GeocodingProvider.GEOCODER
-            }
-            store.setGeocodingProvider(provider)
-        }
-
         applyCompassModeSelection(debugCompassModeGroup, store.getCompassSensorMode())
         debugCompassModeGroup.setOnCheckedChangeListener { _, checkedId ->
             val mode = when (checkedId) {
@@ -208,9 +197,8 @@ class SettingsActivity : AppCompatActivity() {
             store.setArrivalDestinationName("${destination.lat}, ${destination.lng}")
             GeofenceHelper.clearDestinationGeofence(this)
             NotificationHelper.cancelApproachProgress(this)
-            val provider = store.getGeocodingProvider()
             Thread {
-                val destinationText = ReverseGeocoder.resolve(this, destination, provider)
+                val destinationText = ReverseGeocoder.resolve(this, destination)
                 runOnUiThread {
                     if (!store.isDestinationAnswered() || store.getDestination() != expectedDestination) {
                         return@runOnUiThread
@@ -573,15 +561,6 @@ class SettingsActivity : AppCompatActivity() {
         } catch (_: Exception) {
             "unknown"
         }
-    }
-
-    private fun applyProviderSelection(group: RadioGroup, provider: GeocodingProvider) {
-        val id = when (provider) {
-            GeocodingProvider.PHOTON -> R.id.providerPhoton
-            GeocodingProvider.NOMINATIM -> R.id.providerNominatim
-            GeocodingProvider.GEOCODER -> R.id.providerGeocoder
-        }
-        group.check(id)
     }
 
     private fun applyWidgetBearingModeSelection(group: RadioGroup, mode: WidgetBearingMode) {

@@ -668,41 +668,6 @@
                         android:text="@string/debug_compass_mode_legacy" />
                 </RadioGroup>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/noto_sans_jp"
-                    android:text="@string/debug_geocoder_provider_title"
-                    android:textColor="@color/expressive_primary"
-                    android:textSize="13sp" />
-
-                <RadioGroup
-                    android:id="@+id/geocoderProviderGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/providerGeocoder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/debug_provider_geocoder" />
-
-                    <RadioButton
-                        android:id="@+id/providerPhoton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/debug_provider_photon" />
-
-                    <RadioButton
-                        android:id="@+id/providerNominatim"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/debug_provider_nominatim" />
-                </RadioGroup>
-
                 <Button
                     android:id="@+id/debugReachedButton"
                     android:layout_width="match_parent"

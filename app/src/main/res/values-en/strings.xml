@@ -17,6 +17,9 @@
     <string name="background_permission_guide_title">Allow Background Location</string>
     <string name="background_permission_guide_message">To ensure widget updates and arrival notifications work correctly, please open \"Permissions\" on the next screen and set location access to \"Allow all the time\".</string>
     <string name="background_permission_guide_positive">Go to Settings</string>
+    <string name="welcome_title">Welcome to BeastLocator</string>
+    <string name="welcome_message">With this app, you can instantly find the direction to the Beast Residence.\n\n⚠️ This is a personally developed fan app. It does not encourage or promote any nuisance or disruptive behavior near the Coat Corporation headquarters.</string>
+    <string name="welcome_start_button">Get Started</string>
     <string name="fixed_destination_title">Current Destination</string>
     <string name="fixed_destination_help">Coordinates for the Beast House. The app will guide you here.</string>
     <string name="fixed_destination_value_format">Lat %1$s / Lng %2$s</string>
@@ -83,10 +86,6 @@
     <string name="experimental_language_toggle">Use non-Japanese languages</string>
     <string name="experimental_language_toggle_help">Currently supports Simplified Chinese and English.</string>
     <string name="experimental_language_open_settings">Go to Language Settings</string>
-    <string name="experimental_oss_mode_title">OSS License Mode</string>
-    <string name="experimental_oss_mode_help">Method for generating the Open Source License list</string>
-    <string name="experimental_oss_mode_toggle">Auto-generate OSS Licenses</string>
-    <string name="experimental_oss_mode_toggle_help">Automatically generates and displays the OSS license list.</string>
     <string name="back">Back</string>
     <string name="about_section_title">About This App</string>
     <string name="about_section_help">View app information and OSS licenses</string>
@@ -94,10 +93,6 @@
     <string name="about_screen_title">About This App</string>
     <string name="about_version_label">%1$s  v%2$s (%3$d)</string>
     <string name="about_dev_channel_title">Development Channel</string>
-    <string name="about_dev_channel_value">IntDev</string>
-    <string name="about_channel_label_intdev">Internal Build</string>
-    <string name="about_channel_label_dev">Beta</string>
-    <string name="about_channel_label_stable">Stable</string>
     <string name="about_dev_channel_dialog_title">Development Channel: %1$s</string>
     <string name="about_dev_channel_desc_intdev">IntDev is used for internal testing. It is only available to developers and selected members, and may include specification changes or unstable behavior. Includes a debug menu.</string>
     <string name="about_dev_channel_desc_dev">Beta is a pre-release version. It is published on GitHub and other platforms but may exhibit unstable behavior. Includes a debug menu.</string>
@@ -125,8 +120,6 @@
     <string name="oss_androidx_title">AndroidX (Core / AppCompat / Activity / ConstraintLayout)</string>
     <string name="oss_material_title">Material Components for Android</string>
     <string name="oss_kotlin_title">Kotlin Standard Library</string>
-    <string name="oss_photon_title">Photon (Reverse Geocoding)</string>
-    <string name="oss_osm_title">OpenStreetMap / Nominatim Data</string>
     <string name="oss_google_title">Google Play services Location</string>
     <string name="license_apache_2">Apache License 2.0</string>
     <string name="license_odbl">ODbL 1.0</string>
@@ -136,7 +129,7 @@
     <string name="license_google_terms_body">Google Play services Location API is provided under Google Play services terms.\n\nThis is not distributed as a typical OSS license text in this app.\nPlease refer to Google\'s official terms and policies for details.</string>
     <string name="oss_open_failed">Failed to open URL</string>
     <string name="language_settings_open_failed">Failed to open Language Settings</string>
-    <string name="oss_auto_load_failed">Failed to load auto-generated licenses; showing manual list.</string>
+    <string name="oss_auto_load_failed">Failed to load auto-generated licenses.</string>
     <string name="oss_unknown_license">License not specified</string>
     <string name="oss_unknown_url">No URL</string>
     <string name="version_format">BeastLocator / Version %1$s</string>
@@ -179,10 +172,6 @@
     <string name="debug_section_title">Debug</string>
     <string name="debug_revision_title">Build Number</string>
     <string name="debug_revision_value">%1$s</string>
-    <string name="debug_geocoder_provider_title">Reverse Geocoding Provider</string>
-    <string name="debug_provider_geocoder">Android Geocoder (Recommended)</string>
-    <string name="debug_provider_photon">Photon</string>
-    <string name="debug_provider_nominatim">Nominatim</string>
     <string name="debug_show_reached">Mark session as Arrived</string>
     <string name="debug_start_approach">Start Approach Progress</string>
     <string name="debug_start_approach_unsupported">Start Approach Progress (Android 16+)</string>

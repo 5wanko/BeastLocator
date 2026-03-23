@@ -83,7 +83,7 @@ class AboutActivity : AppCompatActivity() {
 
     private fun splitVersionAndChannel(versionName: String): Pair<String, String> {
         fun fallback(): Pair<String, String> =
-            Pair(versionName, getString(R.string.about_dev_channel_value))
+            Pair(versionName, "unknown")
 
         // Preferred format: x.x.x-Channel
         val hyphenPos = versionName.lastIndexOf('-')
@@ -105,7 +105,7 @@ class AboutActivity : AppCompatActivity() {
 
         val channel = rawChannel.trim('(', ')', ' ')
         val coreVersion = versionName.substring(0, dotPos).trimEnd('.')
-        return Pair(coreVersion.ifBlank { versionName }, channel.ifBlank { getString(R.string.about_dev_channel_value) })
+        return Pair(coreVersion.ifBlank { versionName }, channel.ifBlank { "unknown" })
     }
 
     private fun showDevChannelDescription(channelName: String) {
@@ -189,12 +189,8 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun resolveChannelLabel(channelName: String): String {
-        return when {
-            channelName.equals("IntDev", ignoreCase = true) -> getString(R.string.about_channel_label_intdev)
-            channelName.equals("Beta", ignoreCase = true) -> getString(R.string.about_channel_label_dev)
-            channelName.equals("Stable", ignoreCase = true) -> getString(R.string.about_channel_label_stable)
-            else -> getString(R.string.about_channel_label_dev)
-        }
+        val normalized = channelName.trim()
+        return normalized.ifBlank { "unknown" }
     }
 }
 

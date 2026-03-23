@@ -32,11 +32,10 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         store.setDestinationAnswered(true)
         store.setArrivalDestinationName("${destination.lat}, ${destination.lng}")
         NotificationHelper.cancelApproachProgress(context)
-        val provider = store.getGeocodingProvider()
         val pending = goAsync()
         Thread {
             try {
-                val destinationText = ReverseGeocoder.resolve(context, destination, provider)
+                val destinationText = ReverseGeocoder.resolve(context, destination)
                 if (!store.isDestinationAnswered() || store.getDestination() != destination) {
                     return@Thread
                 }

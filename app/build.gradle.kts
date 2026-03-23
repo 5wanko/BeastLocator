@@ -1,11 +1,17 @@
 import java.io.File
+import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.Properties
 import java.util.TimeZone
-import org.gradle.api.artifacts.ExternalModuleDependency
+import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.api.artifacts.result.ResolvedArtifactResult
+import org.gradle.maven.MavenModule
+import org.gradle.maven.MavenPomArtifact
+import java.util.zip.ZipFile
+import javax.xml.parsers.DocumentBuilderFactory
 
 plugins {
     id("com.android.application")
@@ -75,34 +81,79 @@ fun jsonEscape(value: String): String {
     }
 }
 
-fun resolveLicenseMetadata(group: String, name: String): Triple<String, String, String> {
-    return when {
-        group.startsWith("androidx.") -> Triple(
-            "Apache License 2.0",
-            "https://developer.android.com/jetpack/androidx/releases",
-            "AndroidX libraries are distributed under Apache License 2.0."
+data class PomLicense(val name: String, val url: String?)
+
+data class PomMetadata(
+    val name: String?,
+    val projectUrl: String?,
+    val licenses: List<PomLicense>
+)
+
+fun parsePomMetadata(pomFile: File): PomMetadata {
+    return runCatching {
+        val doc = DocumentBuilderFactory.newInstance()
+            .newDocumentBuilder()
+            .parse(pomFile)
+            .apply { documentElement.normalize() }
+        fun firstTextByTag(tag: String): String? {
+            val nodes = doc.getElementsByTagName(tag)
+            for (i in 0 until nodes.length) {
+                val value = nodes.item(i)?.textContent?.trim()
+                if (!value.isNullOrBlank()) return value
+            }
+            return null
+        }
+        val projectName = firstTextByTag("name")
+        val projectUrl = firstTextByTag("url")
+        val licenseNodes = doc.getElementsByTagName("license")
+        val licenses = buildList {
+            for (i in 0 until licenseNodes.length) {
+                val node = licenseNodes.item(i) ?: continue
+                val children = node.childNodes
+                var licenseName: String? = null
+                var licenseUrl: String? = null
+                for (j in 0 until children.length) {
+                    val child = children.item(j) ?: continue
+                    when (child.nodeName) {
+                        "name" -> licenseName = child.textContent?.trim()
+                        "url" -> licenseUrl = child.textContent?.trim()
+                    }
+                }
+                if (!licenseName.isNullOrBlank()) {
+                    add(PomLicense(name = licenseName, url = licenseUrl))
+                }
+            }
+        }
+        PomMetadata(
+            name = projectName,
+            projectUrl = projectUrl,
+            licenses = licenses
         )
-        group == "com.google.android.material" -> Triple(
-            "Apache License 2.0",
-            "https://github.com/material-components/material-components-android",
-            "Material Components for Android is distributed under Apache License 2.0."
-        )
-        group.startsWith("org.jetbrains.kotlin") -> Triple(
-            "Apache License 2.0",
-            "https://kotlinlang.org/docs/license.html",
-            "Kotlin is distributed under Apache License 2.0."
-        )
-        group.startsWith("com.google.android.gms") -> Triple(
-            "Google Play services Terms",
-            "https://policies.google.com/terms",
-            "Google Play services is provided under Google Play services terms."
-        )
-        else -> Triple(
-            "License not specified",
-            "https://mvnrepository.com/artifact/$group/$name",
-            "Please check the upstream project page for license details."
-        )
+    }.getOrElse {
+        PomMetadata(name = null, projectUrl = null, licenses = emptyList())
     }
+}
+
+fun readNoticeOrLicenseText(artifactFile: File): String? {
+    if (!artifactFile.exists() || !artifactFile.isFile) return null
+    val candidateNames = listOf(
+        "META-INF/NOTICE",
+        "META-INF/NOTICE.txt",
+        "META-INF/NOTICE.md",
+        "META-INF/LICENSE",
+        "META-INF/LICENSE.txt",
+        "META-INF/LICENSE.md"
+    )
+    return runCatching {
+        ZipFile(artifactFile).use { zip ->
+            candidateNames.firstNotNullOfOrNull { name ->
+                val entry = zip.getEntry(name) ?: return@firstNotNullOfOrNull null
+                zip.getInputStream(entry).bufferedReader(StandardCharsets.UTF_8).use { reader ->
+                    reader.readText().takeIf { it.isNotBlank() }
+                }
+            }
+        }
+    }.getOrNull()
 }
 
 fun prettifyArtifactName(name: String): String {
@@ -187,42 +238,67 @@ val generatedOssFile = generatedOssAssetsDir.map { it.file("oss_licenses/oss_lic
 val generateOssLicensesAutoJson = tasks.register("generateOssLicensesAutoJson") {
     outputs.file(generatedOssFile)
     doLast {
-        val implementationDeps = project.configurations
-            .getByName("implementation")
-            .dependencies
-            .withType(ExternalModuleDependency::class.java)
-            .mapNotNull { dep ->
-                val group = dep.group ?: return@mapNotNull null
-                val version = dep.version ?: return@mapNotNull null
-                val (license, url, body) = resolveLicenseMetadata(group, dep.name)
-                OssCatalogEntry(
-                    title = resolveDisplayTitle(group, dep.name),
-                    coordinate = "$group:${dep.name}:$version",
-                    license = license,
-                    url = url,
-                    body = body
-                )
+        val runtimeConfigurationName = listOf(
+            "debugRuntimeClasspath",
+            "releaseRuntimeClasspath",
+            "runtimeClasspath"
+        ).firstOrNull { project.configurations.findByName(it) != null }
+            ?: error("No runtime classpath configuration found for OSS generation.")
+
+        val runtimeArtifacts = project.configurations
+            .getByName(runtimeConfigurationName)
+            .incoming
+            .artifacts
+            .artifacts
+            .filterIsInstance<ResolvedArtifactResult>()
+
+        val moduleArtifacts = runtimeArtifacts
+            .mapNotNull { artifact ->
+                val id = artifact.id.componentIdentifier as? ModuleComponentIdentifier
+                    ?: return@mapNotNull null
+                id to artifact.file
             }
-            .distinctBy { it.coordinate }
+            .distinctBy { (id, _) -> "${id.group}:${id.module}:${id.version}" }
 
-        val extraEntries = listOf(
+        val componentIds = moduleArtifacts.map { it.first }
+        val pomByCoordinate = mutableMapOf<String, PomMetadata>()
+        if (componentIds.isNotEmpty()) {
+            val queryResult = dependencies.createArtifactResolutionQuery()
+                .forComponents(componentIds)
+                .withArtifacts(MavenModule::class.java, MavenPomArtifact::class.java)
+                .execute()
+            queryResult.resolvedComponents.forEach { component ->
+                val id = component.id as? ModuleComponentIdentifier ?: return@forEach
+                val pomArtifact = component.getArtifacts(MavenPomArtifact::class.java)
+                    .filterIsInstance<ResolvedArtifactResult>()
+                    .firstOrNull()
+                    ?: return@forEach
+                val coordinate = "${id.group}:${id.module}:${id.version}"
+                pomByCoordinate[coordinate] = parsePomMetadata(pomArtifact.file)
+            }
+        }
+
+        val entries = moduleArtifacts.map { (id, artifactFile) ->
+            val coordinate = "${id.group}:${id.module}:${id.version}"
+            val pom = pomByCoordinate[coordinate]
+            val licenses = pom?.licenses.orEmpty()
+            val licenseLabel = if (licenses.isEmpty()) {
+                "License not specified"
+            } else {
+                licenses.joinToString(" / ") { it.name }
+            }
+            val licenseUrl = licenses.firstOrNull { !it.url.isNullOrBlank() }?.url
+            val projectUrl = pom?.projectUrl
+            val body = readNoticeOrLicenseText(artifactFile)
             OssCatalogEntry(
-                title = "Photon (Reverse Geocoding API)",
-                coordinate = "service:photon",
-                license = "Apache License 2.0",
-                url = "https://github.com/komoot/photon",
-                body = "Photon reverse geocoding service is open source under Apache License 2.0."
-            ),
-            OssCatalogEntry(
-                title = "OpenStreetMap / Nominatim Data",
-                coordinate = "data:openstreetmap-nominatim",
-                license = "ODbL 1.0",
-                url = "https://www.openstreetmap.org/copyright",
-                body = "OpenStreetMap data is licensed under ODbL 1.0."
+                title = pom?.name?.takeIf { it.isNotBlank() }
+                    ?: resolveDisplayTitle(id.group, id.module),
+                coordinate = coordinate,
+                license = licenseLabel,
+                url = licenseUrl ?: projectUrl ?: "https://mvnrepository.com/artifact/${id.group}/${id.module}",
+                body = body ?: ""
             )
-        )
-
-        val entries = (implementationDeps + extraEntries)
+        }
             .distinctBy { it.coordinate }
             .sortedBy { it.coordinate.lowercase(Locale.US) }
 
@@ -259,13 +335,13 @@ android {
         buildConfig = true
     }
 
-    val appVersionName = "1.2.4-IntDev"
+    val appVersionName = "0.9.0-Beta" // (開発時バージョン: 1.2.5-IntDev)
 
     defaultConfig {
         applicationId = "jp.linkserver.beastlocator"
         minSdk = 26 // 通常は26
         targetSdk = 34
-        versionCode = 202603234   // 2026, 03, 23, 4(年、月、日、その日のうちの何個目)
+        versionCode = 202603235   // 2026, 03, 23, 5(年、月、日、その日のうちの何個目)
         versionName = appVersionName
         buildConfigField("String", "REVISION_ID", "\"$revisionId\"")
     }

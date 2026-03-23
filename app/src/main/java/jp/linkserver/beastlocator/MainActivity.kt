@@ -95,8 +95,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private val permissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-            ensureBackgroundLocationPermission()
-            startUpdatesIfPermitted()
+            continueAfterPermissionFlow()
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -141,7 +140,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         DestinationWidgetProvider.refreshAllWidgets(this)
         if (skipPermissionGuideOnce) {
             skipPermissionGuideOnce = false
-            startUpdatesIfPermitted()
+            continueAfterPermissionFlow()
         } else {
             requestRuntimePermissionsIfNeeded()
         }
@@ -186,9 +185,22 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if (required.isNotEmpty()) {
             permissionLauncher.launch(required.toTypedArray())
         } else {
-            ensureBackgroundLocationPermission()
-            startUpdatesIfPermitted()
+            continueAfterPermissionFlow()
         }
+    }
+
+    private fun continueAfterPermissionFlow() {
+        ensureBackgroundLocationPermission()
+        if (maybeLaunchWelcomeScreen()) return
+        startUpdatesIfPermitted()
+    }
+
+    private fun maybeLaunchWelcomeScreen(): Boolean {
+        if (store.isWelcomeCompleted()) return false
+        if (!hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) return false
+        if (isShowingPreciseLocationPermissionGuide || isShowingBackgroundPermissionGuide) return false
+        startActivity(Intent(this, WelcomeActivity::class.java))
+        return true
     }
 
     private fun ensurePreciseLocationPermission() {
@@ -458,9 +470,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if (!currentName.isNullOrBlank() && !currentName.contains(",")) return
 
         isResolvingArrivalName = true
-        val provider = store.getGeocodingProvider()
         Thread {
-            val resolved = ReverseGeocoder.resolve(this, target, provider)
+            val resolved = ReverseGeocoder.resolve(this, target)
             runOnUiThread {
                 isResolvingArrivalName = false
                 val currentTarget = destination
@@ -649,13 +660,25 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun openAppPermissionSettings() {
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-            data = Uri.fromParts("package", packageName, null)
-        }
-        skipPermissionGuideOnce = true
-        runCatching {
-            startActivity(intent)
-        }.onFailure {
+        val intents = listOf(
+            Intent("android.settings.APP_PERMISSION_SETTINGS").apply {
+                putExtra("android.provider.extra.APP_PACKAGE", packageName)
+                putExtra("android.provider.extra.PERMISSION_NAME", Manifest.permission.ACCESS_FINE_LOCATION)
+                putExtra("android.provider.extra.PERMISSION_GROUP_NAME", "android.permission-group.LOCATION")
+            },
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                data = Uri.fromParts("package", packageName, null)
+            }
+        )
+        for (intent in intents) {
+            if (intent.resolveActivity(packageManager) == null) continue
+            skipPermissionGuideOnce = true
+            val launched = runCatching {
+                startActivity(intent)
+            }.isSuccess
+            if (launched) {
+                return
+            }
             skipPermissionGuideOnce = false
         }
     }

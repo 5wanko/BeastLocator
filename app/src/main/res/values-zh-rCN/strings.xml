@@ -17,6 +17,9 @@
     <string name="background_permission_guide_title">允许后台位置信息</string>
     <string name="background_permission_guide_message">为确保微件更新和到达通知正常工作，请在下一屏幕打开“权限”，并将位置信息更改为“始终允许”。</string>
     <string name="background_permission_guide_positive">前往设置</string>
+    <string name="welcome_title">欢迎来到 BeastLocator</string>
+    <string name="welcome_message">有了这款应用，您可以瞬间掌握前往野兽邸的方向。\n\n⚠️ 本应用为个人制作的粉丝向应用。无意鼓励或助长在 Coat Corporation 总部周边的滋扰或骚扰行为。</string>
+    <string name="welcome_start_button">开始使用</string>
     <string name="fixed_destination_title">当前目的地</string>
     <string name="fixed_destination_help">野兽邸的坐标。应用将引导您前往此处。</string>
     <string name="fixed_destination_value_format">纬度 %1$s / 经度 %2$s</string>
@@ -83,10 +86,6 @@
     <string name="experimental_language_toggle">使用日语以外的语言</string>
     <string name="experimental_language_toggle_help">目前支持简体中文和英语。</string>
     <string name="experimental_language_open_settings">前往语言设置</string>
-    <string name="experimental_oss_mode_title">OSS 许可显示方式</string>
-    <string name="experimental_oss_mode_help">开源许可列表的生成方式</string>
-    <string name="experimental_oss_mode_toggle">自动生成 OSS 许可</string>
-    <string name="experimental_oss_mode_toggle_help">自动生成并显示 OSS 许可列表。</string>
     <string name="back">返回</string>
     <string name="about_section_title">关于本应用</string>
     <string name="about_section_help">显示应用信息和开源许可</string>
@@ -94,10 +93,6 @@
     <string name="about_screen_title">关于本应用</string>
     <string name="about_version_label">%1$s  v%2$s (%3$d)</string>
     <string name="about_dev_channel_title">开发频道</string>
-    <string name="about_dev_channel_value">IntDev</string>
-    <string name="about_channel_label_intdev">内部开发版</string>
-    <string name="about_channel_label_dev">Beta版</string>
-    <string name="about_channel_label_stable">稳定版</string>
     <string name="about_dev_channel_dialog_title">开发频道: %1$s</string>
     <string name="about_dev_channel_desc_intdev">IntDev 用于内部验证。仅对开发人员和部分成员公开，可能包含规格变更或不稳定的行为。包含调试菜单。</string>
     <string name="about_dev_channel_desc_dev">Beta 是预发布版本。虽然在 GitHub 等平台公开，但可能会出现不稳定的行为。包含调试菜单。</string>
@@ -125,8 +120,6 @@
     <string name="oss_androidx_title">AndroidX (Core / AppCompat / Activity / ConstraintLayout)</string>
     <string name="oss_material_title">Material Components for Android</string>
     <string name="oss_kotlin_title">Kotlin Standard Library</string>
-    <string name="oss_photon_title">Photon (逆地理编码)</string>
-    <string name="oss_osm_title">OpenStreetMap / Nominatim 数据</string>
     <string name="oss_google_title">Google Play 服务位置信息</string>
     <string name="license_apache_2">Apache License 2.0</string>
     <string name="license_odbl">ODbL 1.0</string>
@@ -136,7 +129,7 @@
     <string name="license_google_terms_body">Google Play 服务位置 API 根据 Google Play 服务条款提供。\n\n本应用未以典型的开源许可文本形式分发此内容。\n详情请参考 Google 官方条款和政策。</string>
     <string name="oss_open_failed">无法打开 URL</string>
     <string name="language_settings_open_failed">无法打开语言设置</string>
-    <string name="oss_auto_load_failed">自动生成许可加载失败，正在显示手动列表</string>
+    <string name="oss_auto_load_failed">自动生成许可加载失败</string>
     <string name="oss_unknown_license">未指定许可</string>
     <string name="oss_unknown_url">无 URL</string>
     <string name="version_format">BeastLocator / 版本 %1$s</string>
@@ -179,10 +172,6 @@
     <string name="debug_section_title">调试</string>
     <string name="debug_revision_title">构建编号</string>
     <string name="debug_revision_value">%1$s</string>
-    <string name="debug_geocoder_provider_title">逆地理编码提供商</string>
-    <string name="debug_provider_geocoder">Android Geocoder (推荐)</string>
-    <string name="debug_provider_photon">Photon</string>
-    <string name="debug_provider_nominatim">Nominatim</string>
     <string name="debug_show_reached">将当前会话设为已到达</string>
     <string name="debug_start_approach">开始接近进度显示</string>
     <string name="debug_start_approach_unsupported">开始接近进度显示 (Android 16+)</string>
