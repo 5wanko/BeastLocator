@@ -1,0 +1,24 @@
+package jp.linkserver.beastlocator
+
+import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetProvider
+import android.content.Context
+import android.content.Intent
+
+class DestinationWidgetProviderLarge : AppWidgetProvider() {
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray
+    ) {
+        WidgetRenderer.render(context, appWidgetManager, appWidgetIds, R.layout.widget_large)
+    }
+
+    override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
+        if (intent.action == WidgetRenderer.ACTION_REFRESH_WIDGETS) {
+            WidgetRenderer.refreshAllWidgets(context)
+        }
+    }
+}
+

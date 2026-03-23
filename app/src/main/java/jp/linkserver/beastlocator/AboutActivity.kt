@@ -1,0 +1,148 @@
+package jp.linkserver.beastlocator
+
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
+class AboutActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_about)
+
+        val (versionName, versionCode) = resolveAppVersionInfo()
+        val (simpleVersion, channelName) = splitVersionAndChannel(versionName)
+        val channelLabel = resolveChannelLabel(channelName)
+        findViewById<TextView>(R.id.aboutVersionText).text =
+            getString(R.string.about_version_label, channelLabel, versionName, versionCode)
+        findViewById<TextView>(R.id.aboutDevChannelText).text =
+            channelName
+        findViewById<TextView>(R.id.aboutSimpleVersionText).text =
+            getString(R.string.about_simple_version_value, simpleVersion)
+        findViewById<TextView>(R.id.aboutUpdateVersionText).text =
+            getString(R.string.about_update_latest_format, versionName, versionCode)
+        findViewById<android.widget.FrameLayout>(R.id.aboutDevChannelCard).setOnClickListener {
+            showDevChannelDescription(channelName)
+        }
+        findViewById<android.widget.FrameLayout>(R.id.aboutSimpleVersionCard).setOnClickListener {
+            showVersionDetailsDialog(versionName, versionCode)
+        }
+
+        findViewById<LinearLayout>(R.id.openOssLicensesCard).setOnClickListener {
+            startActivity(android.content.Intent(this, OssLicensesActivity::class.java))
+        }
+        findViewById<android.widget.Button>(R.id.aboutSupportSiteButton).setOnClickListener {
+            openUrl(getString(R.string.about_support_site_url))
+        }
+        findViewById<android.widget.Button>(R.id.aboutSupportTwitterButton).setOnClickListener {
+            openUrl(getString(R.string.about_support_twitter_url))
+        }
+        findViewById<ImageButton>(R.id.aboutBackButton).setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun resolveAppVersionInfo(): Pair<String, Int> {
+        return try {
+            val info = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                packageManager.getPackageInfo(
+                    packageName,
+                    android.content.pm.PackageManager.PackageInfoFlags.of(0)
+                )
+            } else {
+                @Suppress("DEPRECATION")
+                packageManager.getPackageInfo(packageName, 0)
+            }
+            val versionName = info.versionName ?: "unknown"
+            val versionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                info.longVersionCode.toInt()
+            } else {
+                @Suppress("DEPRECATION")
+                info.versionCode
+            }
+            Pair(versionName, versionCode)
+        } catch (_: Exception) {
+            Pair("unknown", 0)
+        }
+    }
+
+    private fun openUrl(url: String) {
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        } catch (_: Exception) {
+            Toast.makeText(this, R.string.oss_open_failed, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun splitVersionAndChannel(versionName: String): Pair<String, String> {
+        fun fallback(): Pair<String, String> =
+            Pair(versionName, getString(R.string.about_dev_channel_value))
+
+        // Preferred format: x.x.x-Channel
+        val hyphenPos = versionName.lastIndexOf('-')
+        if (hyphenPos > 0 && hyphenPos < versionName.length - 1) {
+            val core = versionName.substring(0, hyphenPos).trim()
+            val channel = versionName.substring(hyphenPos + 1).trim().trim('(', ')')
+            if (core.isNotBlank() && channel.isNotBlank()) {
+                return Pair(core, channel)
+            }
+        }
+
+        // Backward compatibility: x.x.x.Channel
+        val dotPos = versionName.lastIndexOf('.')
+        if (dotPos <= 0 || dotPos >= versionName.length - 1) return fallback()
+        val rawChannel = versionName.substring(dotPos + 1).trim()
+        val hasChannelHint = rawChannel.any { it.isLetter() } ||
+            rawChannel.startsWith("(") || rawChannel.endsWith(")")
+        if (!hasChannelHint) return fallback()
+
+        val channel = rawChannel.trim('(', ')', ' ')
+        val coreVersion = versionName.substring(0, dotPos).trimEnd('.')
+        return Pair(coreVersion.ifBlank { versionName }, channel.ifBlank { getString(R.string.about_dev_channel_value) })
+    }
+
+    private fun showDevChannelDescription(channelName: String) {
+        val normalized = channelName.trim()
+        val messageResId = when {
+            normalized.equals("IntDev", ignoreCase = true) -> R.string.about_dev_channel_desc_intdev
+            normalized.equals("Dev", ignoreCase = true) -> R.string.about_dev_channel_desc_dev
+            normalized.equals("Stable", ignoreCase = true) -> R.string.about_dev_channel_desc_stable
+            else -> R.string.about_dev_channel_desc_unknown
+        }
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.about_dev_channel_dialog_title, normalized))
+            .setMessage(messageResId)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
+
+    private fun showVersionDetailsDialog(versionName: String, versionCode: Int) {
+        val message = getString(
+            R.string.about_version_details_message,
+            versionName,
+            versionCode,
+            BuildConfig.REVISION_ID
+        )
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.about_version_details_title)
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
+
+    private fun resolveChannelLabel(channelName: String): String {
+        return when {
+            channelName.equals("IntDev", ignoreCase = true) -> getString(R.string.about_channel_label_intdev)
+            channelName.equals("Dev", ignoreCase = true) -> getString(R.string.about_channel_label_dev)
+            channelName.equals("Stable", ignoreCase = true) -> getString(R.string.about_channel_label_stable)
+            else -> getString(R.string.about_channel_label_dev)
+        }
+    }
+}
+

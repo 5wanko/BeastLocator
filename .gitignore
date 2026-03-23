@@ -1,0 +1,43 @@
+# Gradle
+.gradle/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local configuration
+local.properties
+
+# IDE (Android Studio / IntelliJ)
+.idea/
+*.iml
+*.ipr
+*.iws
+captures/
+navigation.json
+
+# VS Code
+.vscode/
+
+# Android signing / secrets
+*.jks
+*.keystore
+keystore.properties
+
+# Logs
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Kotlin / Java cache artifacts
+*.class
+out/
+
+# Explicit project-local ignores
+.gradle/
+.gradle-user-home/
+.gradle-verify-home/
+build/
+app/build/
+local.properties
