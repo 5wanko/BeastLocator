@@ -1,5 +1,6 @@
 package jp.linkserver.beastlocator
 
+import android.annotation.SuppressLint
 import android.Manifest
 import android.animation.ObjectAnimator
 import android.app.Activity
@@ -265,6 +266,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
     }
 
+    @SuppressLint("MissingPermission")
     private fun startUpdatesIfPermitted() {
         if (!hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
             fusedClient.removeLocationUpdates(locationCallback)

@@ -26,7 +26,7 @@
                 android:contentDescription="@string/back"
                 android:padding="12dp"
                 android:src="@drawable/ic_arrow_back"
-                android:tint="@color/expressive_on_surface" />
+                app:tint="@color/expressive_on_surface" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -742,7 +742,7 @@
                     android:contentDescription="@string/experimental_settings_open"
                     android:rotation="180"
                     android:src="@drawable/ic_arrow_back"
-                    android:tint="@color/expressive_on_surface_variant" />
+                    app:tint="@color/expressive_on_surface_variant" />
             </LinearLayout>
 
             <LinearLayout
@@ -790,7 +790,7 @@
                     android:contentDescription="@string/about_section_open"
                     android:rotation="180"
                     android:src="@drawable/ic_arrow_back"
-                    android:tint="@color/expressive_on_surface_variant" />
+                    app:tint="@color/expressive_on_surface_variant" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -834,3 +834,4 @@
     </LinearLayout>
 
 </LinearLayout>
+

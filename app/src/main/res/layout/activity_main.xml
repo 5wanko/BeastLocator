@@ -15,7 +15,7 @@
         android:background="@drawable/bg_icon_button"
         android:contentDescription="@string/settings"
         android:padding="10dp"
-        android:tint="@color/expressive_on_surface"
+        app:tint="@color/expressive_on_surface"
         android:src="@drawable/ic_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
         android:contentDescription="@string/distance_mask_button_content_description_off"
         android:padding="10dp"
         android:src="@drawable/ic_visibility_off"
-        android:tint="@color/expressive_on_surface"
+        app:tint="@color/expressive_on_surface"
         app:layout_constraintBottom_toBottomOf="@id/settingsButton"
         app:layout_constraintEnd_toStartOf="@id/settingsButton"
         app:layout_constraintTop_toTopOf="@id/settingsButton" />
@@ -141,3 +141,4 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
