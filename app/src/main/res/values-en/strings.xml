@@ -35,7 +35,7 @@
     <string name="land_only_destination_help">Avoids sea candidates when randomizing. Sea locations may still be chosen in some cases.</string>
     <string name="destination_action_title">Destination Settings</string>
     <string name="destination_action_help">Specify the destination for the app</string>
-    <string name="notification_title_group">Arrival Notifications</string>
+    <string name="notification_title_group">Notifications</string>
     <string name="notification_help">Notifications when approaching the destination</string>
     <string name="privacy_guard_title">Privacy Guard</string>
     <string name="privacy_guard_help">Settings to prevent identity revealing from location data</string>
@@ -69,9 +69,14 @@
     <string name="live_update_start_distance_value_km">%.1f km</string>
     <string name="live_update_start_distance_unsupported">Start distance setting is available on Android 16+.</string>
     <string name="widget_settings_title">Widget Settings</string>
-    <string name="widget_settings_help">Widget update frequency and orientation</string>
-    <string name="widget_background_update_toggle">Update Location in Background</string>
-    <string name="widget_background_update_help">Updates widget position even when the app is closed.</string>
+    <string name="widget_settings_help">Widget orientation display</string>
+    <string name="background_location_section_title">Background Updates</string>
+    <string name="background_location_section_help">Settings for background operation</string>
+    <string name="background_location_update_toggle">Update location in background</string>
+    <string name="background_location_update_help">Updating location as a background app helps you receive notifications more reliably.</string>
+    <string name="background_location_update_help_forced">This setting is always ON because the audio playback feature is enabled.</string>
+    <string name="background_location_update_warning_title">⚠️ Battery Consumption Warning</string>
+    <string name="background_location_update_warning_message">While background operation is beneficial for widget updates and notifications, it may drain the battery faster.</string>
     <string name="widget_bearing_mode_title">Widget Bearing Mode</string>
     <string name="widget_bearing_mode_absolute">Absolute (North-based)</string>
     <string name="widget_bearing_mode_relative">Relative (Device-based)</string>
@@ -149,6 +154,7 @@
     <string name="sound_monitor_notification_arrival_and_interval">Monitoring sounds for arrival and distance intervals.</string>
     <string name="sound_monitor_notification_114514_and_interval">Monitoring sounds for 114.514km and distance intervals.</string>
     <string name="sound_monitor_notification_all">Monitoring all sounds (arrival, 114.514km, and intervals).</string>
+    <string name="sound_monitor_notification_background_only">Updating location in background.</string>
     <string name="sound_playback_channel_name">Sound Playback</string>
     <string name="sound_playback_notification_title">Playing Sound</string>
     <string name="sound_playback_notification_body">Playing audio in the background.</string>

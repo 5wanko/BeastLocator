@@ -57,6 +57,7 @@ class ForegroundDistanceMonitorService : Service() {
             if (store.isArrivalRearmRequired() && distanceMeters > ARRIVAL_THRESHOLD_METERS) {
                 store.setArrivalRearmRequired(false)
             }
+            handleArrivalByDistance(destination, distanceMeters)
             updateApproachLiveUpdate(distanceMeters)
             DestinationWidgetProvider.refreshAllWidgets(this@ForegroundDistanceMonitorService)
             handleSoundTriggers(distanceMeters)
@@ -71,7 +72,7 @@ class ForegroundDistanceMonitorService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (!store.isSoundForegroundMonitorEnabled() || !hasLocationPermission()) {
+        if (!store.isBackgroundLocationUpdateActive() || !hasLocationPermission()) {
             stopSelf()
             return START_NOT_STICKY
         }
@@ -130,6 +131,37 @@ class ForegroundDistanceMonitorService : Service() {
         } else {
             lastIntervalBucket = null
         }
+    }
+
+    private fun handleArrivalByDistance(destination: Destination, distanceMeters: Float) {
+        if (store.isDestinationAnswered()) return
+        if (store.isArrivalRearmRequired()) return
+        if (distanceMeters > ARRIVAL_THRESHOLD_METERS) return
+
+        if (store.isArrivalSoundEnabled()) {
+            playSound(R.raw.arrival_0km)
+        }
+        store.setDestinationAnswered(true)
+        store.setArrivalDestinationName("${destination.lat}, ${destination.lng}")
+        NotificationHelper.cancelApproachProgress(this)
+        NotificationHelper.showDestinationReached(
+            this,
+            getString(R.string.notification_body, "${destination.lat}, ${destination.lng}")
+        )
+        GeofenceHelper.clearDestinationGeofence(this)
+
+        Thread {
+            val resolved = ReverseGeocoder.resolve(this, destination)
+            if (!store.isDestinationAnswered() || store.getDestination() != destination) {
+                return@Thread
+            }
+            store.setArrivalDestinationName(resolved)
+            NotificationHelper.showDestinationReached(
+                this,
+                getString(R.string.notification_body, resolved)
+            )
+            DestinationWidgetProvider.refreshAllWidgets(this)
+        }.start()
     }
 
     private fun entered114514Range(previousDistanceMeters: Float?, currentDistanceMeters: Float): Boolean {
@@ -199,8 +231,10 @@ class ForegroundDistanceMonitorService : Service() {
                 getString(R.string.sound_monitor_notification_arrival_only)
             store.isDistance114514SoundEnabled() ->
                 getString(R.string.sound_monitor_notification_114514_only)
-            else ->
+            store.isDistanceIntervalSoundEnabled() ->
                 getString(R.string.sound_monitor_notification_interval_only)
+            else ->
+                getString(R.string.sound_monitor_notification_background_only)
         }
 
         return NotificationCompat.Builder(this, CHANNEL_ID)

@@ -32,6 +32,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var liveUpdateStartDistanceHelp: TextView
     private lateinit var liveUpdateStartDistanceLabel: TextView
     private lateinit var liveUpdateStartDistanceSeek: SeekBar
+    private var isSyncingBackgroundLocationUpdateSwitch = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +53,10 @@ class SettingsActivity : AppCompatActivity() {
         val screenshotWarningSwitch = findViewById<MaterialSwitch>(R.id.screenshotWarningSwitch)
         val screenshotWarningTitle = findViewById<TextView>(R.id.screenshotWarningToggleTitle)
         val screenshotWarningHelp = findViewById<TextView>(R.id.screenshotWarningToggleHelp)
+        val backgroundLocationUpdateSwitch = findViewById<MaterialSwitch>(R.id.backgroundLocationUpdateSwitch)
+        val backgroundLocationUpdateTitle = findViewById<TextView>(R.id.backgroundLocationUpdateToggleTitle)
+        val backgroundLocationUpdateHelp = findViewById<TextView>(R.id.backgroundLocationUpdateToggleHelp)
         val arrivalNotificationSwitch = findViewById<MaterialSwitch>(R.id.arrivalNotificationSwitch)
-        val widgetBackgroundUpdateSwitch = findViewById<MaterialSwitch>(R.id.widgetBackgroundUpdateSwitch)
         val widgetBearingModeGroup = findViewById<RadioGroup>(R.id.widgetBearingModeGroup)
         toggleDebugMenuButton = findViewById(R.id.toggleDebugMenuButton)
         debugSection = findViewById(R.id.debugSection)
@@ -123,11 +126,46 @@ class SettingsActivity : AppCompatActivity() {
             screenshotWarningHelp.setTextColor(ContextCompat.getColor(this, R.color.expressive_outline))
         }
 
-        widgetBackgroundUpdateSwitch.isChecked = store.isWidgetBackgroundUpdateEnabled()
-        widgetBackgroundUpdateSwitch.setOnCheckedChangeListener { _, isChecked ->
-            store.setWidgetBackgroundUpdateEnabled(isChecked)
+        backgroundLocationUpdateSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isSyncingBackgroundLocationUpdateSwitch) return@setOnCheckedChangeListener
+            if (store.isBackgroundLocationUpdateForcedBySound()) {
+                syncBackgroundLocationUpdateToggleUi(
+                    backgroundLocationUpdateSwitch,
+                    backgroundLocationUpdateTitle,
+                    backgroundLocationUpdateHelp
+                )
+                return@setOnCheckedChangeListener
+            }
+            if (isChecked && !store.isBackgroundLocationUpdateEnabled()) {
+                MaterialAlertDialogBuilder(this)
+                    .setTitle(R.string.background_location_update_warning_title)
+                    .setMessage(R.string.background_location_update_warning_message)
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        store.setBackgroundLocationUpdateEnabled(true)
+                        BackgroundLocationUpdater.updateRegistration(this)
+                    }
+                    .setNegativeButton(android.R.string.cancel) { _, _ ->
+                        isSyncingBackgroundLocationUpdateSwitch = true
+                        backgroundLocationUpdateSwitch.isChecked = false
+                        isSyncingBackgroundLocationUpdateSwitch = false
+                    }
+                    .setOnCancelListener {
+                        isSyncingBackgroundLocationUpdateSwitch = true
+                        backgroundLocationUpdateSwitch.isChecked = false
+                        isSyncingBackgroundLocationUpdateSwitch = false
+                    }
+                    .show()
+                return@setOnCheckedChangeListener
+            }
+
+            store.setBackgroundLocationUpdateEnabled(isChecked)
             BackgroundLocationUpdater.updateRegistration(this)
         }
+        syncBackgroundLocationUpdateToggleUi(
+            backgroundLocationUpdateSwitch,
+            backgroundLocationUpdateTitle,
+            backgroundLocationUpdateHelp
+        )
 
         applyWidgetBearingModeSelection(widgetBearingModeGroup, store.getWidgetBearingMode())
         widgetBearingModeGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -248,6 +286,33 @@ class SettingsActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         applyDebugMenuAccessPolicy()
+        syncBackgroundLocationUpdateToggleUi(
+            findViewById(R.id.backgroundLocationUpdateSwitch),
+            findViewById(R.id.backgroundLocationUpdateToggleTitle),
+            findViewById(R.id.backgroundLocationUpdateToggleHelp)
+        )
+    }
+
+    private fun syncBackgroundLocationUpdateToggleUi(
+        toggle: MaterialSwitch,
+        title: TextView,
+        help: TextView
+    ) {
+        val forced = store.isBackgroundLocationUpdateForcedBySound()
+        if (forced && !store.isBackgroundLocationUpdateEnabled()) {
+            store.setBackgroundLocationUpdateEnabled(true)
+        }
+        isSyncingBackgroundLocationUpdateSwitch = true
+        toggle.isChecked = if (forced) true else store.isBackgroundLocationUpdateEnabled()
+        toggle.isEnabled = !forced
+        isSyncingBackgroundLocationUpdateSwitch = false
+
+        help.text = getString(
+            if (forced) R.string.background_location_update_help_forced
+            else R.string.background_location_update_help
+        )
+        title.setTextColor(ContextCompat.getColor(this, R.color.expressive_on_surface))
+        BackgroundLocationUpdater.updateRegistration(this)
     }
 
     private fun showDebugDestinationInputDialog() {

@@ -37,8 +37,56 @@ class BackgroundLocationReceiver : BroadcastReceiver() {
         if (store.isArrivalRearmRequired() && distance > ARRIVAL_THRESHOLD_METERS) {
             store.setArrivalRearmRequired(false)
         }
+        if (handleArrivalByDistance(context, store, destination, distance)) {
+            return
+        }
         updateApproachLiveUpdate(context, store, distance)
         DestinationWidgetProvider.refreshAllWidgets(context)
+    }
+
+    private fun handleArrivalByDistance(
+        context: Context,
+        store: DestinationStore,
+        destination: Destination,
+        distanceMeters: Float
+    ): Boolean {
+        if (store.isDestinationAnswered()) return false
+        if (store.isArrivalRearmRequired()) return false
+        if (distanceMeters > ARRIVAL_THRESHOLD_METERS) return false
+
+        if (store.isArrivalSoundEnabled()) {
+            SoundEffectPlayer.play(context, R.raw.arrival_0km)
+        }
+        store.setDestinationAnswered(true)
+        store.setArrivalDestinationName("${destination.lat}, ${destination.lng}")
+        NotificationHelper.cancelApproachProgress(context)
+        NotificationHelper.showDestinationReached(
+            context,
+            context.getString(
+                R.string.notification_body,
+                "${destination.lat}, ${destination.lng}"
+            )
+        )
+        GeofenceHelper.clearDestinationGeofence(context)
+
+        val pending = goAsync()
+        Thread {
+            try {
+                val resolved = ReverseGeocoder.resolve(context, destination)
+                if (!store.isDestinationAnswered() || store.getDestination() != destination) {
+                    return@Thread
+                }
+                store.setArrivalDestinationName(resolved)
+                NotificationHelper.showDestinationReached(
+                    context,
+                    context.getString(R.string.notification_body, resolved)
+                )
+            } finally {
+                DestinationWidgetProvider.refreshAllWidgets(context)
+                pending.finish()
+            }
+        }.start()
+        return true
     }
 
     private fun updateApproachLiveUpdate(

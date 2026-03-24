@@ -204,10 +204,10 @@ class DestinationStore(context: Context) {
         prefs.edit().putBoolean(KEY_ARRIVAL_NOTIFICATION_ENABLED, enabled).apply()
     }
 
-    fun isWidgetBackgroundUpdateEnabled(): Boolean =
+    fun isBackgroundLocationUpdateEnabled(): Boolean =
         prefs.getBoolean(KEY_WIDGET_BACKGROUND_UPDATE_ENABLED, true)
 
-    fun setWidgetBackgroundUpdateEnabled(enabled: Boolean) {
+    fun setBackgroundLocationUpdateEnabled(enabled: Boolean) {
         prefs.edit().putBoolean(KEY_WIDGET_BACKGROUND_UPDATE_ENABLED, enabled).apply()
     }
 
@@ -292,6 +292,12 @@ class DestinationStore(context: Context) {
             isDistance114514SoundEnabled() ||
             isDistanceIntervalSoundEnabled()
     }
+
+    fun isBackgroundLocationUpdateForcedBySound(): Boolean =
+        isSoundForegroundMonitorEnabled()
+
+    fun isBackgroundLocationUpdateActive(): Boolean =
+        isBackgroundLocationUpdateEnabled() || isBackgroundLocationUpdateForcedBySound()
 
     fun isDebugMenuVisible(): Boolean = prefs.getBoolean(KEY_DEBUG_MENU_VISIBLE, false)
 

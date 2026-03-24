@@ -35,7 +35,7 @@
     <string name="land_only_destination_help">随机抽取目的地时避开海上位置。在某些情况下可能仍会选中海上。</string>
     <string name="destination_action_title">目的地设置</string>
     <string name="destination_action_help">指定应用指向的目的地</string>
-    <string name="notification_title_group">到达通知</string>
+    <string name="notification_title_group">通知</string>
     <string name="notification_help">靠近目的地时的通知</string>
     <string name="privacy_guard_title">隐私保护（防开盒）</string>
     <string name="privacy_guard_help">防止通过位置信息泄露身份的相关设置</string>
@@ -69,9 +69,14 @@
     <string name="live_update_start_distance_value_km">%.1f km</string>
     <string name="live_update_start_distance_unsupported">进度起始距离设置仅支持 Android 16+。</string>
     <string name="widget_settings_title">微件设置</string>
-    <string name="widget_settings_help">微件的更新方式和方位显示</string>
-    <string name="widget_background_update_toggle">在后台更新位置信息</string>
-    <string name="widget_background_update_help">在未打开应用时也更新微件位置。</string>
+    <string name="widget_settings_help">微件方位显示</string>
+    <string name="background_location_section_title">后台更新</string>
+    <string name="background_location_section_help">关于后台运行的相关设置</string>
+    <string name="background_location_update_toggle">在后台更新位置</string>
+    <string name="background_location_update_help">通过作为后台应用运行来更新位置，使通知更易于送达。</string>
+    <string name="background_location_update_help_forced">由于音频播放功能已启用，此设置将始终保持开启。</string>
+    <string name="background_location_update_warning_title">⚠️ 关于电池消耗的注意事项</string>
+    <string name="background_location_update_warning_message">虽然开启后台运行有利于小组件更新和通知送达，但可能会加快电池消耗。</string>
     <string name="widget_bearing_mode_title">微件方位显示</string>
     <string name="widget_bearing_mode_absolute">绝对方位（以北为基准）</string>
     <string name="widget_bearing_mode_relative">相对方位（以设备朝向为基准）</string>
@@ -149,6 +154,7 @@
     <string name="sound_monitor_notification_arrival_and_interval">正在监控到达/按距离间隔的声音播放。</string>
     <string name="sound_monitor_notification_114514_and_interval">正在监控 114.514km/按距离间隔的声音播放。</string>
     <string name="sound_monitor_notification_all">正在监控到达/114.514km/按距离间隔的声音播放。</string>
+    <string name="sound_monitor_notification_background_only">正在后台更新位置信息。</string>
     <string name="sound_playback_channel_name">声音播放</string>
     <string name="sound_playback_notification_title">正在播放声音</string>
     <string name="sound_playback_notification_body">正在后台播放音频。</string>

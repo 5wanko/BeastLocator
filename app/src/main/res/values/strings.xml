@@ -35,7 +35,7 @@
     <string name="land_only_destination_help">目的地の抽選時に海上の候補を避けるようになります。場合によって海上の位置が選ばれることがあります</string>
     <string name="destination_action_title">目的地の設定</string>
     <string name="destination_action_help">アプリが指す目的地を指定</string>
-    <string name="notification_title_group">到達通知</string>
+    <string name="notification_title_group">通知</string>
     <string name="notification_help">目的地に近づいた際の通知</string>
     <string name="privacy_guard_title">身バレ防止機能</string>
     <string name="privacy_guard_help">位置の特定につながる項目に関する設定</string>
@@ -69,9 +69,14 @@
     <string name="live_update_start_distance_value_km" translatable="false">%.1f km</string>
     <string name="live_update_start_distance_unsupported">開始距離の設定は Android 16+ で利用できます</string>
     <string name="widget_settings_title">ウィジェット設定</string>
-    <string name="widget_settings_help">ウィジェットの更新方法と方位表示</string>
-    <string name="widget_background_update_toggle">バックグラウンドで位置情報を更新</string>
-    <string name="widget_background_update_help">アプリを開いていない間もウィジェットの位置を更新します</string>
+    <string name="widget_settings_help">ウィジェットの方位表示</string>
+    <string name="background_location_section_title">バックグラウンド更新</string>
+    <string name="background_location_section_help">バックグラウンド動作に関する設定</string>
+    <string name="background_location_update_toggle">バックグラウンドで位置を更新</string>
+    <string name="background_location_update_help">バックグラウンドアプリとして動作して位置を更新するため、通知が来やすくなります</string>
+    <string name="background_location_update_help_forced">音声再生機能が有効なため、この設定は常にオンになります</string>
+    <string name="background_location_update_warning_title">⚠️バッテリー消費に関する注意</string>
+    <string name="background_location_update_warning_message">バックグラウンドにするとウィジェットの更新や通知などの面で有利ですが、バッテリーの消費が早くなる可能性があります</string>
     <string name="widget_bearing_mode_title">ウィジェットの方位表示</string>
     <string name="widget_bearing_mode_absolute">絶対方位（北基準）</string>
     <string name="widget_bearing_mode_relative">相対方位（端末の向き基準）</string>
@@ -149,6 +154,7 @@
     <string name="sound_monitor_notification_arrival_and_interval">到着時/距離間隔ごとの音声再生を監視しています</string>
     <string name="sound_monitor_notification_114514_and_interval">114.514km時/距離間隔ごとの音声再生を監視しています</string>
     <string name="sound_monitor_notification_all">到着時/114.514km時/距離間隔ごとの音声再生を監視しています</string>
+    <string name="sound_monitor_notification_background_only">バックグラウンドで位置情報を更新しています</string>
     <string name="sound_playback_channel_name">サウンド再生</string>
     <string name="sound_playback_notification_title">サウンドを再生中</string>
     <string name="sound_playback_notification_body">バックグラウンドで音声を再生しています</string>
