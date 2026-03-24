@@ -91,6 +91,10 @@
     <string name="experimental_language_toggle">日本語以外の言語を使用する</string>
     <string name="experimental_language_toggle_help">現在は簡体中国語、英語に対応しています</string>
     <string name="experimental_language_open_settings">言語設定に進む</string>
+    <string name="experimental_compass_title">コンパス</string>
+    <string name="experimental_compass_help">方位表示に関する設定</string>
+    <string name="experimental_compass_smoothing_toggle">野獣先輩の動きを平滑化</string>
+    <string name="experimental_compass_smoothing_toggle_help">ONにすることで、野獣先輩の動きを多少滑らかにすることができます</string>
     <string name="back">戻る</string>
     <string name="about_section_title">このアプリについて</string>
     <string name="about_section_help">アプリ情報とオープンソースライセンスを表示します</string>
@@ -122,7 +126,7 @@
     <string name="about_support_twitter_url" translatable="false">https://x.com/Link_2011A</string>
     <string name="about_update_title">更新情報</string>
     <string name="about_update_latest_format">現在のバージョン: %1$s (%2$d)</string>
-    <string name="about_update_notes">最新の更新内容:\n• 最初のプレリリース\n• 未使用の機能を削除\n• ウェルカムページを追加\n• その他のバグ修正</string>
+    <string name="about_update_notes">最新の更新内容:\n• コンパスの値がおかしい場合にクラッシュする問題を修正\n• 位置情報の許可を求めるダイアログが無限に増殖できてしまう問題を修正\n• アプリ情報画面にイースターエッグを追加\n• その他のバグ修正</string>
     <string name="oss_screen_title">オープンソースライセンス</string>
     <string name="oss_button_open_url">URLを開く</string>
     <string name="oss_button_show_text">本文を表示</string>

@@ -91,6 +91,10 @@
     <string name="experimental_language_toggle">Use non-Japanese languages</string>
     <string name="experimental_language_toggle_help">Currently supports Simplified Chinese and English.</string>
     <string name="experimental_language_open_settings">Go to Language Settings</string>
+    <string name="experimental_compass_title">Compass</string>
+    <string name="experimental_compass_help">Settings related to direction display</string>
+    <string name="experimental_compass_smoothing_toggle">Smooth Yajuu Senpai\'s movements</string>
+    <string name="experimental_compass_smoothing_toggle_help">Enabling this makes Yajuu Senpai\'s movements slightly smoother.</string>
     <string name="back">Back</string>
     <string name="about_section_title">About This App</string>
     <string name="about_section_help">View app information and OSS licenses</string>
@@ -122,7 +126,7 @@
     <string name="about_support_twitter_url">https://x.com/Link_2011A</string>
     <string name="about_update_title">Update Info</string>
     <string name="about_update_latest_format">Current Version: %1$s (%2$d)</string>
-    <string name="about_update_notes">Latest Updates:\n• First pre-release\n• Removed unused features\n• Added Welcome page\n• Other bug fixes</string>
+    <string name="about_update_notes">Latest Updates:\n• Fixed an issue where the app would crash when compass values were invalid.\n• Fixed a bug where the location permission dialog could be duplicated infinitely.\n• Added an Easter egg to the App Info screen.\n• Other bug fixes.</string>
     <string name="oss_screen_title">Open Source Licenses</string>
     <string name="oss_button_open_url">Open URL</string>
     <string name="oss_button_show_text">Show Text</string>

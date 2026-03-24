@@ -276,6 +276,13 @@ class DestinationStore(context: Context) {
         prefs.edit().putBoolean(KEY_DISTANCE_INTERVAL_SOUND_ENABLED, enabled).apply()
     }
 
+    fun isCompassSmoothingEnabled(): Boolean =
+        prefs.getBoolean(KEY_COMPASS_SMOOTHING_ENABLED, false)
+
+    fun setCompassSmoothingEnabled(enabled: Boolean) {
+        prefs.edit().putBoolean(KEY_COMPASS_SMOOTHING_ENABLED, enabled).apply()
+    }
+
     fun getDistanceIntervalSoundMeters(): Int =
         prefs.getInt(KEY_DISTANCE_INTERVAL_SOUND_METERS, DEFAULT_DISTANCE_INTERVAL_SOUND_METERS)
 
@@ -366,6 +373,7 @@ class DestinationStore(context: Context) {
         private const val KEY_ARRIVAL_SOUND_ENABLED = "arrival_sound_enabled"
         private const val KEY_DISTANCE_114514_SOUND_ENABLED = "distance_114514_sound_enabled"
         private const val KEY_DISTANCE_INTERVAL_SOUND_ENABLED = "distance_interval_sound_enabled"
+        private const val KEY_COMPASS_SMOOTHING_ENABLED = "compass_smoothing_enabled"
         private const val KEY_DISTANCE_INTERVAL_SOUND_METERS = "distance_interval_sound_meters"
         private const val KEY_DEBUG_MENU_VISIBLE = "debug_menu_visible"
         private const val KEY_STABLE_DEBUG_MENU_UNLOCK_ENABLED = "stable_debug_menu_unlock_enabled"

@@ -30,14 +30,18 @@ object WidgetRenderer {
         )
         val normalDistanceText = if (current == null) {
             context.getString(R.string.widget_distance_placeholder)
+        } else if (!isValidDestination(current) || !isValidDestination(target)) {
+            context.getString(R.string.widget_distance_placeholder)
         } else {
-            val d = GeoUtils.distanceMeters(current, target)
+            val d = runCatching { GeoUtils.distanceMeters(current, target) }.getOrDefault(0f)
             formatWidgetDistance(d)
         }
         val absoluteBearing = if (current == null) {
             0f
+        } else if (!isValidDestination(current) || !isValidDestination(target)) {
+            0f
         } else {
-            GeoUtils.bearingDegrees(current, target)
+            runCatching { GeoUtils.bearingDegrees(current, target) }.getOrDefault(0f)
         }
         val displayBearing = if (current == null) {
             0f
@@ -141,8 +145,16 @@ object WidgetRenderer {
     }
 
     private fun normalizeTo360(value: Float): Float {
+        if (!value.isFinite()) return 0f
         val mod = value % 360f
         return if (mod < 0f) mod + 360f else mod
+    }
+
+    private fun isValidDestination(destination: Destination): Boolean {
+        if (!destination.lat.isFinite() || !destination.lng.isFinite()) return false
+        if (destination.lat !in -90.0..90.0) return false
+        if (destination.lng !in -180.0..180.0) return false
+        return true
     }
 }
 

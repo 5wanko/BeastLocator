@@ -9,6 +9,7 @@ local.properties
 # Additional local Gradle caches / artifacts
 .gradle-local/
 .gradle-user-home/
+.gradle-user-home-codex/
 .gradle-user-home-verify/
 .gradle-verify-home/
 .gradle-verify-project-cache/

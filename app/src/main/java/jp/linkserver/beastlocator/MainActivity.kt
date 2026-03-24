@@ -24,6 +24,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -58,12 +59,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var loadingArrowAnimator: ObjectAnimator? = null
 
     private var headingDegrees: Float = 0f
+    private var hasHeadingSample = false
+    private var isCompassSmoothingEnabled = false
     private var currentLocation: Destination? = null
     private var destination: Destination? = null
     private var hasShownInAppArrival = false
     private var isResolvingArrivalName = false
     private var isShowingPreciseLocationPermissionGuide = false
     private var isShowingBackgroundPermissionGuide = false
+    private var backgroundPermissionGuideDialog: AlertDialog? = null
     private var skipPermissionGuideOnce = false
     private var isScreenCaptureCallbackRegistered = false
     private var screenCaptureCallbackRef: Any? = null
@@ -134,6 +138,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onResume()
         destination = store.getDestination()
         currentLocation = store.getLastKnownLocation()
+        isCompassSmoothingEnabled = store.isCompassSmoothingEnabled()
         hasShownInAppArrival = store.isDestinationAnswered()
         applyDistanceMaskToggleButtonState()
         arrowView.clearColorFilter()
@@ -238,11 +243,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             hasPermission(Manifest.permission.ACCESS_FINE_LOCATION) &&
             !hasPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         ) {
-            if (isShowingBackgroundPermissionGuide) {
+            if (isShowingBackgroundPermissionGuide ||
+                backgroundPermissionGuideDialog?.isShowing == true
+            ) {
                 return
             }
             isShowingBackgroundPermissionGuide = true
-            MaterialAlertDialogBuilder(this)
+            backgroundPermissionGuideDialog = MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.background_permission_guide_title)
                 .setMessage(R.string.background_permission_guide_message)
                 .setCancelable(false)
@@ -251,12 +258,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     isShowingBackgroundPermissionGuide = false
                     openAppPermissionSettings()
                 }
-                .setNegativeButton(android.R.string.cancel) { _, _ ->
-                    isShowingBackgroundPermissionGuide = false
-                    startUpdatesIfPermitted()
-                }
                 .setOnDismissListener {
                     isShowingBackgroundPermissionGuide = false
+                    backgroundPermissionGuideDialog = null
                 }
                 .show()
         }
@@ -368,6 +372,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private fun updateUi(refreshWidgets: Boolean) {
         val current = currentLocation ?: return
         val target = destination ?: return
+        if (!isValidDestination(current) || !isValidDestination(target)) return
 
         stopLoadingArrowAnimation()
         if (store.isDestinationAnswered()) {
@@ -378,11 +383,21 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             return
         }
 
-        val distance = GeoUtils.distanceMeters(current, target)
-        val bearing = GeoUtils.bearingDegrees(current, target)
+        val (distance, bearing) = runCatching {
+            GeoUtils.distanceMeters(current, target) to GeoUtils.bearingDegrees(current, target)
+        }.getOrElse {
+            return
+        }
+        if (!distance.isFinite() || !bearing.isFinite()) {
+            return
+        }
+        if (!headingDegrees.isFinite()) return
         val relativeRotation = normalizeRotation(
             bearing - headingDegrees - ARROW_IMAGE_FORWARD_OFFSET_DEGREES
         )
+        if (!relativeRotation.isFinite()) {
+            return
+        }
 
         setArrivalStateVisible(false)
         arrowView.rotation = relativeRotation
@@ -554,6 +569,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun normalizeRotation(value: Float): Float {
+        if (!value.isFinite()) return 0f
         var normalized = value % 360f
         if (normalized > 180f) normalized -= 360f
         if (normalized < -180f) normalized += 360f
@@ -707,13 +723,34 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if (event == null) return
         when (event.sensor.type) {
             Sensor.TYPE_ROTATION_VECTOR -> {
-                headingDegrees = calculateHeadingFromRotationVector(event.values)
+                val heading = calculateHeadingFromRotationVector(event.values) ?: return
+                if (headingDegrees.isFinite()) {
+                    val jump = abs(normalizeRotation(heading - headingDegrees))
+                    if (jump > 120f) return
+                }
+                headingDegrees = if (isCompassSmoothingEnabled && hasHeadingSample) {
+                    smoothAngleDegrees(headingDegrees, heading, 0.65f)
+                } else {
+                    hasHeadingSample = true
+                    heading
+                }
                 updateUi(refreshWidgets = false)
             }
             Sensor.TYPE_ORIENTATION -> {
                 @Suppress("DEPRECATION")
                 val azimuth = event.values[0]
-                headingDegrees = normalizeTo360(azimuth)
+                if (!azimuth.isFinite()) return
+                val heading = normalizeTo360(azimuth)
+                if (headingDegrees.isFinite()) {
+                    val jump = abs(normalizeRotation(heading - headingDegrees))
+                    if (jump > 120f) return
+                }
+                headingDegrees = if (isCompassSmoothingEnabled && hasHeadingSample) {
+                    smoothAngleDegrees(headingDegrees, heading, 0.55f)
+                } else {
+                    hasHeadingSample = true
+                    heading
+                }
                 updateUi(refreshWidgets = false)
             }
         }
@@ -721,22 +758,32 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
 
-    private fun calculateHeadingFromRotationVector(values: FloatArray): Float {
-        SensorManager.getRotationMatrixFromVector(rotationMatrix, values)
-        val (xAxis, yAxis) = when (getDisplayRotation()) {
-            android.view.Surface.ROTATION_90 -> Pair(SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X)
-            android.view.Surface.ROTATION_180 -> Pair(SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y)
-            android.view.Surface.ROTATION_270 -> Pair(SensorManager.AXIS_MINUS_Y, SensorManager.AXIS_X)
-            else -> Pair(SensorManager.AXIS_X, SensorManager.AXIS_Y)
-        }
-        SensorManager.remapCoordinateSystem(
-            rotationMatrix,
-            xAxis,
-            yAxis,
-            remappedRotationMatrix
-        )
-        SensorManager.getOrientation(remappedRotationMatrix, orientationAngles)
-        return normalizeTo360(Math.toDegrees(orientationAngles[0].toDouble()).toFloat())
+    private fun calculateHeadingFromRotationVector(values: FloatArray): Float? {
+        if (values.isEmpty() || values.any { !it.isFinite() }) return null
+
+        return runCatching {
+            SensorManager.getRotationMatrixFromVector(rotationMatrix, values)
+            val (xAxis, yAxis) = when (getDisplayRotation()) {
+                android.view.Surface.ROTATION_90 -> Pair(SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X)
+                android.view.Surface.ROTATION_180 -> Pair(SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y)
+                android.view.Surface.ROTATION_270 -> Pair(SensorManager.AXIS_MINUS_Y, SensorManager.AXIS_X)
+                else -> Pair(SensorManager.AXIS_X, SensorManager.AXIS_Y)
+            }
+            SensorManager.remapCoordinateSystem(
+                rotationMatrix,
+                xAxis,
+                yAxis,
+                remappedRotationMatrix
+            )
+            SensorManager.getOrientation(remappedRotationMatrix, orientationAngles)
+            val heading = Math.toDegrees(orientationAngles[0].toDouble()).toFloat()
+            if (!heading.isFinite()) return null
+            normalizeTo360(heading)
+        }.getOrNull()
+    }
+
+    private fun Float.isFinite(): Boolean {
+        return !isNaN() && !isInfinite()
     }
 
     private fun getDisplayRotation(): Int {
@@ -749,8 +796,22 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun normalizeTo360(value: Float): Float {
+        if (!value.isFinite()) return 0f
         val mod = value % 360f
         return if (mod < 0f) mod + 360f else mod
+    }
+
+    private fun smoothAngleDegrees(current: Float, target: Float, alpha: Float): Float {
+        val clampedAlpha = alpha.coerceIn(0f, 1f)
+        val delta = normalizeRotation(target - current)
+        return normalizeTo360(current + (delta * clampedAlpha))
+    }
+
+    private fun isValidDestination(destination: Destination): Boolean {
+        if (!destination.lat.isFinite() || !destination.lng.isFinite()) return false
+        if (destination.lat !in -90.0..90.0) return false
+        if (destination.lng !in -180.0..180.0) return false
+        return true
     }
 }
 

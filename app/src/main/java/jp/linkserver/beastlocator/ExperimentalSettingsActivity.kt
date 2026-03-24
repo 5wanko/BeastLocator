@@ -36,6 +36,7 @@ class ExperimentalSettingsActivity : AppCompatActivity() {
         val distance114514SoundSwitch = findViewById<MaterialSwitch>(R.id.distance114514SoundSwitch)
         val distance114514LinkButton = findViewById<Button>(R.id.distance114514LinkButton)
         val distanceIntervalSoundSwitch = findViewById<MaterialSwitch>(R.id.distanceIntervalSoundSwitch)
+        val compassSmoothingSwitch = findViewById<MaterialSwitch>(R.id.compassSmoothingSwitch)
         val nonJapaneseLanguageSwitch = findViewById<MaterialSwitch>(R.id.nonJapaneseLanguageSwitch)
         val openLanguageSettingsButton = findViewById<Button>(R.id.openLanguageSettingsButton)
 
@@ -77,6 +78,11 @@ class ExperimentalSettingsActivity : AppCompatActivity() {
             store.setDistanceIntervalSoundEnabled(isChecked)
             applyDistanceIntervalSoundUiEnabled(isChecked)
             BackgroundLocationUpdater.updateRegistration(this)
+        }
+
+        compassSmoothingSwitch.isChecked = store.isCompassSmoothingEnabled()
+        compassSmoothingSwitch.setOnCheckedChangeListener { _, isChecked ->
+            store.setCompassSmoothingEnabled(isChecked)
         }
 
         nonJapaneseLanguageSwitch.isChecked = store.isNonJapaneseLanguageEnabled()

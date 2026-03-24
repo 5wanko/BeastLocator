@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -46,6 +47,10 @@ class AboutActivity : AppCompatActivity() {
         }
         findViewById<ImageButton>(R.id.aboutBackButton).setOnClickListener {
             finish()
+        }
+        findViewById<ImageView>(R.id.aboutAppIcon).setOnLongClickListener {
+            showEasterEggDialog()
+            true
         }
     }
 
@@ -184,6 +189,20 @@ class AboutActivity : AppCompatActivity() {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.about_version_details_title)
             .setView(container)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
+
+    private fun showEasterEggDialog() {
+        val imageView = ImageView(this).apply {
+            setImageResource(R.drawable.annyui)
+            adjustViewBounds = true
+            scaleType = ImageView.ScaleType.FIT_CENTER
+            val padding = (16 * resources.displayMetrics.density).toInt()
+            setPadding(padding, padding, padding, padding)
+        }
+        MaterialAlertDialogBuilder(this)
+            .setView(imageView)
             .setPositiveButton(android.R.string.ok, null)
             .show()
     }
