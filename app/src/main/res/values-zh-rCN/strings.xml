@@ -58,7 +58,7 @@
     <string name="distance_interval_sound_toggle">定距播放“咆哮”声音</string>
     <string name="distance_interval_sound_toggle_help">每靠近目的地固定距离时播放“野兽咆哮”。\n⚠️ 注意：此声音无法暂停，请注意不要在公共场合脱出。</string>
     <string name="distance_interval_sound_distance_title">播放间隔</string>
-    <string name="distance_interval_sound_distance_help">设置范围为 200m 至 5km。</string>
+    <string name="distance_interval_sound_distance_help">设置范围为 100m 至 5km。</string>
     <string name="distance_interval_sound_distance_value_m">%1$d m</string>
     <string name="distance_interval_sound_distance_value_km">%.1f km</string>
     <string name="distance_mask_button_content_description_on">关闭距离模糊</string>
@@ -126,7 +126,7 @@
     <string name="about_support_twitter_url">https://x.com/Link_2011A</string>
     <string name="about_update_title">更新信息</string>
     <string name="about_update_latest_format">当前版本: %1$s (%2$d)</string>
-    <string name="about_update_notes">最新更新内容：\n• 修复了指南针数值异常时导致程序崩溃的問題\n• 修复了位置权限请求对话框可以无限叠加的问题\n• 在“关于本应用”界面添加了彩蛋\n• 其他缺陷修复</string>
+    <string name="about_update_notes">最新更新内容：\n• 优化了野兽先辈动作的平滑处理\n• 改进了此前过短的小部件更新间隔\n• 将定期播放咆哮的功能范围更改为 100m 至 5km 内可用\n• 其他缺陷修复</string>
     <string name="oss_screen_title">开源许可</string>
     <string name="oss_button_open_url">打开 URL</string>
     <string name="oss_button_show_text">显示正文</string>

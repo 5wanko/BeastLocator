@@ -154,7 +154,7 @@ class ExperimentalSettingsActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val DISTANCE_INTERVAL_SOUND_MIN_METERS = 200
+        private const val DISTANCE_INTERVAL_SOUND_MIN_METERS = 100
         private const val DISTANCE_INTERVAL_SOUND_MAX_METERS = 5000
         private const val DISTANCE_INTERVAL_SOUND_STEP_METERS = 100
         private const val DISTANCE_INTERVAL_SOUND_MAX_PROGRESS =

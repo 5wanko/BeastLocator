@@ -724,12 +724,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         when (event.sensor.type) {
             Sensor.TYPE_ROTATION_VECTOR -> {
                 val heading = calculateHeadingFromRotationVector(event.values) ?: return
-                if (headingDegrees.isFinite()) {
-                    val jump = abs(normalizeRotation(heading - headingDegrees))
-                    if (jump > 120f) return
-                }
                 headingDegrees = if (isCompassSmoothingEnabled && hasHeadingSample) {
-                    smoothAngleDegrees(headingDegrees, heading, 0.65f)
+                    smoothAngleDegrees(headingDegrees, heading, 0.15f)
                 } else {
                     hasHeadingSample = true
                     heading
@@ -741,12 +737,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 val azimuth = event.values[0]
                 if (!azimuth.isFinite()) return
                 val heading = normalizeTo360(azimuth)
-                if (headingDegrees.isFinite()) {
-                    val jump = abs(normalizeRotation(heading - headingDegrees))
-                    if (jump > 120f) return
-                }
                 headingDegrees = if (isCompassSmoothingEnabled && hasHeadingSample) {
-                    smoothAngleDegrees(headingDegrees, heading, 0.55f)
+                    smoothAngleDegrees(headingDegrees, heading, 0.10f)
                 } else {
                     hasHeadingSample = true
                     heading
@@ -759,10 +751,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
 
     private fun calculateHeadingFromRotationVector(values: FloatArray): Float? {
-        if (values.isEmpty() || values.any { !it.isFinite() }) return null
+        if (values.isEmpty()) return null
+        val safeLen = minOf(values.size, 4)
+        for (i in 0 until safeLen) {
+            if (!values[i].isFinite()) return null
+        }
+        val safeValues = if (values.size > 4) values.sliceArray(0 until safeLen) else values
 
         return runCatching {
-            SensorManager.getRotationMatrixFromVector(rotationMatrix, values)
+            SensorManager.getRotationMatrixFromVector(rotationMatrix, safeValues)
             val (xAxis, yAxis) = when (getDisplayRotation()) {
                 android.view.Surface.ROTATION_90 -> Pair(SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X)
                 android.view.Surface.ROTATION_180 -> Pair(SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y)

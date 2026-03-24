@@ -58,7 +58,7 @@
     <string name="distance_interval_sound_toggle">Play Roar at Regular Intervals</string>
     <string name="distance_interval_sound_toggle_help">Plays a roar sound every time you get closer to the destination by a set interval.\n⚠️ Note: This audio cannot be paused; use caution in public.</string>
     <string name="distance_interval_sound_distance_title">Playback Interval</string>
-    <string name="distance_interval_sound_distance_help">Can be set between 200m and 5km.</string>
+    <string name="distance_interval_sound_distance_help">Can be set between 100m and 5km.</string>
     <string name="distance_interval_sound_distance_value_m">%1$d m</string>
     <string name="distance_interval_sound_distance_value_km">%.1f km</string>
     <string name="distance_mask_button_content_description_on">Turn off distance masking</string>
@@ -126,7 +126,7 @@
     <string name="about_support_twitter_url">https://x.com/Link_2011A</string>
     <string name="about_update_title">Update Info</string>
     <string name="about_update_latest_format">Current Version: %1$s (%2$d)</string>
-    <string name="about_update_notes">Latest Updates:\n• Fixed an issue where the app would crash when compass values were invalid.\n• Fixed a bug where the location permission dialog could be duplicated infinitely.\n• Added an Easter egg to the App Info screen.\n• Other bug fixes.</string>
+    <string name="about_update_notes">Latest Updates:\n• Improved the smoothing process for Yajuu Senpai\'s movements.\n• Optimized the widget update interval, which was previously too short.\n• Changed the periodic roar feature to be available within a range of 100m to 5km.\n• Other bug fixes.</string>
     <string name="oss_screen_title">Open Source Licenses</string>
     <string name="oss_button_open_url">Open URL</string>
     <string name="oss_button_show_text">Show Text</string>

@@ -28,6 +28,7 @@ class ForegroundDistanceMonitorService : Service() {
     private var distance114514SoundPlayed = false
     private var lastIntervalBucket: Int? = null
     private var previousDistanceMeters: Float? = null
+    private var lastWidgetUpdateTimeMs: Long = 0L
 
     private val locationRequest = LocationRequest.Builder(
         Priority.PRIORITY_HIGH_ACCURACY,
@@ -60,7 +61,16 @@ class ForegroundDistanceMonitorService : Service() {
             }
             handleArrivalByDistance(destination, distanceMeters)
             updateApproachLiveUpdate(distanceMeters)
-            DestinationWidgetProvider.refreshAllWidgets(this@ForegroundDistanceMonitorService)
+            
+            val now = System.currentTimeMillis()
+            val isLiveUpdateRanged = store.isLiveUpdateEnabled() && 
+                distanceMeters <= store.getLiveUpdateStartDistanceMeters()
+            
+            if (isLiveUpdateRanged || now - lastWidgetUpdateTimeMs >= 10 * 60 * 1000L) {
+                DestinationWidgetProvider.refreshAllWidgets(this@ForegroundDistanceMonitorService)
+                lastWidgetUpdateTimeMs = now
+            }
+            
             handleSoundTriggers(distanceMeters)
             previousDistanceMeters = distanceMeters
         }
@@ -181,7 +191,7 @@ class ForegroundDistanceMonitorService : Service() {
             lastIntervalBucket = null
             return
         }
-        val intervalMeters = store.getDistanceIntervalSoundMeters().coerceIn(200, 5000)
+        val intervalMeters = store.getDistanceIntervalSoundMeters().coerceIn(100, 5000)
         val currentBucket = (distanceMeters / intervalMeters.toFloat()).toInt()
         val previousBucket = lastIntervalBucket
         lastIntervalBucket = currentBucket

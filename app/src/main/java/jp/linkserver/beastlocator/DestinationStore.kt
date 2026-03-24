@@ -277,7 +277,7 @@ class DestinationStore(context: Context) {
     }
 
     fun isCompassSmoothingEnabled(): Boolean =
-        prefs.getBoolean(KEY_COMPASS_SMOOTHING_ENABLED, false)
+        prefs.getBoolean(KEY_COMPASS_SMOOTHING_ENABLED, true)
 
     fun setCompassSmoothingEnabled(enabled: Boolean) {
         prefs.edit().putBoolean(KEY_COMPASS_SMOOTHING_ENABLED, enabled).apply()
@@ -385,7 +385,7 @@ class DestinationStore(context: Context) {
         private const val MIN_LIVE_UPDATE_START_DISTANCE_METERS = 200
         private const val MAX_LIVE_UPDATE_START_DISTANCE_METERS = 5000
         private const val DEFAULT_DISTANCE_INTERVAL_SOUND_METERS = 1000
-        private const val MIN_DISTANCE_INTERVAL_SOUND_METERS = 200
+        private const val MIN_DISTANCE_INTERVAL_SOUND_METERS = 100
         private const val MAX_DISTANCE_INTERVAL_SOUND_METERS = 5000
         private const val DEFAULT_NON_JAPANESE_LANGUAGE_ENABLED = true
         private const val DEFAULT_DEST_LAT = 35.665554

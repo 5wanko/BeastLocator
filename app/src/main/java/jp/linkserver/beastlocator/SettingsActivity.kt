@@ -507,7 +507,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun crossedIntervalBoundary(previousDistanceMeters: Float?, currentDistanceMeters: Float): Boolean {
         if (previousDistanceMeters == null) return false
-        val intervalMeters = store.getDistanceIntervalSoundMeters().coerceIn(200, 5000).toFloat()
+        val intervalMeters = store.getDistanceIntervalSoundMeters().coerceIn(100, 5000).toFloat()
         val previousBucket = (previousDistanceMeters / intervalMeters).toInt()
         val currentBucket = (currentDistanceMeters / intervalMeters).toInt()
         return currentBucket < previousBucket
