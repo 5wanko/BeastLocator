@@ -42,7 +42,7 @@ Stableビルドでは隠し機能とする予定ですが、Beta では設定画
 ## 動作確認済みの機種
 
 手持ちの端末で、Android 16/15で動作することは確認しています<br>
-一応、Android 8 (API 26)以上であれば使用可能です
+一応、Android 8.0 (API 26)以上であれば使用可能です
 
 - Nothing Phone (3) Metroid-B4.0-260206-1135-JPN
 - Nothing Phone (2) Pong-B4.0-260226-0955
