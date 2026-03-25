@@ -71,9 +71,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var skipPermissionGuideOnce = false
     private var isScreenCaptureCallbackRegistered = false
     private var screenCaptureCallbackRef: Any? = null
-    private val rotationMatrix = FloatArray(9)
+    private val accelerometerReading = FloatArray(3)
+    private val magnetometerReading  = FloatArray(3)
+    private val rotationMatrix       = FloatArray(9)
+    private val orientationAngles    = FloatArray(3)
     private val remappedRotationMatrix = FloatArray(9)
-    private val orientationAngles = FloatArray(3)
     private val locationTimeoutRunnable = Runnable {
         if (currentLocation == null && !store.isDestinationAnswered()) {
             showLocationUnavailableState(R.string.location_timeout)
@@ -703,19 +705,28 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private fun registerCompass() {
         sensorManager.unregisterListener(this)
-        val preferredType = when (store.getCompassSensorMode()) {
-            CompassSensorMode.ROTATION_VECTOR -> Sensor.TYPE_ROTATION_VECTOR
-            CompassSensorMode.LEGACY_ORIENTATION -> Sensor.TYPE_ORIENTATION
-        }
-        val fallbackType = if (preferredType == Sensor.TYPE_ROTATION_VECTOR) {
-            Sensor.TYPE_ORIENTATION
-        } else {
-            Sensor.TYPE_ROTATION_VECTOR
-        }
-        val sensor = sensorManager.getDefaultSensor(preferredType)
-            ?: sensorManager.getDefaultSensor(fallbackType)
-        if (sensor != null) {
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI)
+
+        when (store.getCompassSensorMode()) {
+            CompassSensorMode.ROTATION_VECTOR -> {
+                val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+                    ?: sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+                if (sensor != null) {
+                    sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI)
+                }
+            }
+            CompassSensorMode.LEGACY_ORIENTATION -> {
+                val accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+                val mag   = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+                if (accel != null && mag != null) {
+                    sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
+                    sensorManager.registerListener(this, mag,   SensorManager.SENSOR_DELAY_UI)
+                } else {
+                    val fallback = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+                    if (fallback != null) {
+                        sensorManager.registerListener(this, fallback, SensorManager.SENSOR_DELAY_UI)
+                    }
+                }
+            }
         }
     }
 
@@ -732,20 +743,38 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 }
                 updateUi(refreshWidgets = false)
             }
-            Sensor.TYPE_ORIENTATION -> {
-                @Suppress("DEPRECATION")
-                val azimuth = event.values[0]
-                if (!azimuth.isFinite()) return
-                val heading = normalizeTo360(azimuth)
-                headingDegrees = if (isCompassSmoothingEnabled && hasHeadingSample) {
-                    smoothAngleDegrees(headingDegrees, heading, 0.10f)
-                } else {
-                    hasHeadingSample = true
-                    heading
-                }
-                updateUi(refreshWidgets = false)
+            Sensor.TYPE_ACCELEROMETER -> {
+                System.arraycopy(event.values, 0, accelerometerReading, 0, 3)
+                updateHeadingFromLegacyOrientation()
+            }
+            Sensor.TYPE_MAGNETIC_FIELD -> {
+                System.arraycopy(event.values, 0, magnetometerReading, 0, 3)
+                updateHeadingFromLegacyOrientation()
             }
         }
+    }
+
+    private fun updateHeadingFromLegacyOrientation() {
+        val success = SensorManager.getRotationMatrix(
+            rotationMatrix, null,
+            accelerometerReading,
+            magnetometerReading
+        )
+        if (!success) return
+
+        SensorManager.getOrientation(rotationMatrix, orientationAngles)
+
+        val azimuthRad = orientationAngles[0]
+        if (!azimuthRad.isFinite()) return
+
+        val heading = normalizeTo360(Math.toDegrees(azimuthRad.toDouble()).toFloat())
+        headingDegrees = if (isCompassSmoothingEnabled && hasHeadingSample) {
+            smoothAngleDegrees(headingDegrees, heading, 0.10f)
+        } else {
+            hasHeadingSample = true
+            heading
+        }
+        updateUi(refreshWidgets = false)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
@@ -811,4 +840,3 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         return true
     }
 }
-
