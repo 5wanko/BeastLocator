@@ -338,7 +338,7 @@ android {
 
     defaultConfig {
         applicationId = "jp.linkserver.beastlocator"
-        minSdk = 26 // 通常は26
+        minSdk = 29
         targetSdk = 36
         versionCode = 202603243   // 2026, 03, 24, 3(年、月、日、その日のうちの何個目)
         versionName = appVersionName
