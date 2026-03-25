@@ -47,3 +47,5 @@ desktop.ini
 out/
 生成APK/
 
+.debug-revision-state.properties
+
