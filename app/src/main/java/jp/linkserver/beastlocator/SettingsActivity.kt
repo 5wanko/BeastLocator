@@ -58,6 +58,13 @@ class SettingsActivity : AppCompatActivity() {
         val backgroundLocationUpdateHelp = findViewById<TextView>(R.id.backgroundLocationUpdateToggleHelp)
         val arrivalNotificationSwitch = findViewById<MaterialSwitch>(R.id.arrivalNotificationSwitch)
         val widgetBearingModeGroup = findViewById<RadioGroup>(R.id.widgetBearingModeGroup)
+        val compassLegacyModeSwitch = findViewById<MaterialSwitch>(R.id.compassLegacyModeSwitch)
+        
+        compassLegacyModeSwitch.isChecked = store.isLegacyCompassModeEnabled()
+        compassLegacyModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            store.setLegacyCompassModeEnabled(isChecked)
+        }
+
         toggleDebugMenuButton = findViewById(R.id.toggleDebugMenuButton)
         debugSection = findViewById(R.id.debugSection)
         val debugApproachButton = findViewById<Button>(R.id.debugApproachButton)
@@ -65,7 +72,6 @@ class SettingsActivity : AppCompatActivity() {
         val debugResetDistanceButton = findViewById<Button>(R.id.debugResetDistanceButton)
         val debugEditDestinationButton = findViewById<Button>(R.id.debugEditDestinationButton)
         val debugResetDestinationButton = findViewById<Button>(R.id.debugResetDestinationButton)
-        val debugCompassModeGroup = findViewById<RadioGroup>(R.id.debugCompassModeGroup)
 
         findViewById<TextView>(R.id.versionText).text =
             getString(R.string.version_format, resolveAppVersionName())
@@ -204,14 +210,7 @@ class SettingsActivity : AppCompatActivity() {
 
         applyDebugMenuAccessPolicy()
 
-        applyCompassModeSelection(debugCompassModeGroup, store.getCompassSensorMode())
-        debugCompassModeGroup.setOnCheckedChangeListener { _, checkedId ->
-            val mode = when (checkedId) {
-                R.id.debugCompassLegacy -> CompassSensorMode.LEGACY_ORIENTATION
-                else -> CompassSensorMode.ROTATION_VECTOR
-            }
-            store.setCompassSensorMode(mode)
-        }
+
 
         debugEditDestinationButton.setOnClickListener {
             showDebugDestinationInputDialog()
@@ -299,9 +298,6 @@ class SettingsActivity : AppCompatActivity() {
         help: TextView
     ) {
         val forced = store.isBackgroundLocationUpdateForcedBySound()
-        if (forced && !store.isBackgroundLocationUpdateEnabled()) {
-            store.setBackgroundLocationUpdateEnabled(true)
-        }
         isSyncingBackgroundLocationUpdateSwitch = true
         toggle.isChecked = if (forced) true else store.isBackgroundLocationUpdateEnabled()
         toggle.isEnabled = !forced
@@ -636,13 +632,7 @@ class SettingsActivity : AppCompatActivity() {
         group.check(id)
     }
 
-    private fun applyCompassModeSelection(group: RadioGroup, mode: CompassSensorMode) {
-        val id = when (mode) {
-            CompassSensorMode.ROTATION_VECTOR -> R.id.debugCompassRotationVector
-            CompassSensorMode.LEGACY_ORIENTATION -> R.id.debugCompassLegacy
-        }
-        group.check(id)
-    }
+
 
     companion object {
         private const val ARRIVAL_THRESHOLD_METERS = 50f

@@ -706,25 +706,22 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private fun registerCompass() {
         sensorManager.unregisterListener(this)
 
-        when (store.getCompassSensorMode()) {
-            CompassSensorMode.ROTATION_VECTOR -> {
-                val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
-                    ?: sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-                if (sensor != null) {
-                    sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI)
-                }
+        if (!store.isLegacyCompassModeEnabled()) {
+            val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+            if (sensor != null) {
+                sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI)
             }
-            CompassSensorMode.LEGACY_ORIENTATION -> {
-                val accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-                val mag   = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
-                if (accel != null && mag != null) {
-                    sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
-                    sensorManager.registerListener(this, mag,   SensorManager.SENSOR_DELAY_UI)
-                } else {
-                    val fallback = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
-                    if (fallback != null) {
-                        sensorManager.registerListener(this, fallback, SensorManager.SENSOR_DELAY_UI)
-                    }
+        } else {
+            val accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+            val mag   = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+            if (accel != null && mag != null) {
+                sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
+                sensorManager.registerListener(this, mag,   SensorManager.SENSOR_DELAY_UI)
+            } else {
+                // どちらかが使えない場合は ROTATION_VECTOR にフォールバック
+                val fallback = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+                if (fallback != null) {
+                    sensorManager.registerListener(this, fallback, SensorManager.SENSOR_DELAY_UI)
                 }
             }
         }

@@ -68,6 +68,10 @@
     <string name="live_update_start_distance_value_m" translatable="false">%1$d m</string>
     <string name="live_update_start_distance_value_km" translatable="false">%.1f km</string>
     <string name="live_update_start_distance_unsupported">開始距離の設定は Android 16+ で利用できます</string>
+    <string name="compass_settings_title">コンパス</string>
+    <string name="compass_settings_help">方位表示に関する設定</string>
+    <string name="compass_legacy_mode_title">コンパスを従来方式にする</string>
+    <string name="compass_legacy_mode_summary">コンパスの測定方式がSensor.TYPE_ORIENTATIONになります\nコンパスの動作が不安定な場合にお試しください</string>
     <string name="widget_settings_title">ウィジェット設定</string>
     <string name="widget_settings_help">ウィジェットの方位表示</string>
     <string name="background_location_section_title">バックグラウンド更新</string>
@@ -88,7 +92,7 @@
     <string name="experimental_settings_screen_help">将来的に追加される機能です</string>
     <string name="experimental_language_title">言語設定</string>
     <string name="experimental_language_help">ローカライズの設定</string>
-    <string name="experimental_language_toggle">日本語以外の言語を使用する</string>
+    <string name="experimental_language_toggle">日本語以外の言語も使用可能にする</string>
     <string name="experimental_language_toggle_help">現在は簡体中国語、英語に対応しています</string>
     <string name="experimental_language_open_settings">言語設定に進む</string>
     <string name="experimental_compass_title">コンパス</string>
@@ -126,7 +130,7 @@
     <string name="about_support_twitter_url" translatable="false">https://x.com/Link_2011A</string>
     <string name="about_update_title">更新情報</string>
     <string name="about_update_latest_format">現在のバージョン: %1$s (%2$d)</string>
-    <string name="about_update_notes">最新の更新内容:\n• 野獣先輩の動きを滑らかにする処理を改善\n• 不必要に短くなっていたウィジェットの更新間隔を改善\n• 一定間隔ごとに咆哮を再生する機能を、100m～5kmの範囲で使用できるように変更\n• その他のバグ修正</string>
+    <string name="about_update_notes">最新の更新内容:\n• コンパスの方式切替を、デバッグメニューから通常設定へ移動\n• サウンド設定を無効にした後も、バックグラウンド動作が有効なままになる問題を修正\n• 設定のテキストを改善\n• その他のバグ修正</string>
     <string name="oss_screen_title">オープンソースライセンス</string>
     <string name="oss_button_open_url">URLを開く</string>
     <string name="oss_button_show_text">本文を表示</string>
@@ -185,7 +189,7 @@
     <string name="debug_start_approach">到達進捗表示を開始</string>
     <string name="debug_start_approach_unsupported">到達進捗表示を開始 (Android 16+)</string>
     <string name="debug_set_distance_button">目的地までの距離を書き換え</string>
-    <string name="debug_reset_distance_button">距離をリセット</string>
+    <string name="debug_reset_distance_button">目的地までの距離をリセット</string>
     <string name="debug_set_distance_title">目的地までの距離を書き換え</string>
     <string name="debug_set_distance_message">目的地までの距離を変更するため、デバッグ用に仮想現在地を使用します（単位: m）</string>
     <string name="debug_set_distance_hint">例: 1000</string>
@@ -195,16 +199,13 @@
     <string name="debug_missing_location">現在地が未取得です</string>
     <string name="debug_approach_out_of_range">目的地の50m圏内では開始できません</string>
     <string name="debug_destination_override_title">追加デバッグ設定</string>
-    <string name="debug_destination_edit_button">値を編集</string>
-    <string name="debug_destination_reset_button">初期値に戻す</string>
+    <string name="debug_destination_edit_button">目的地座標を編集</string>
+    <string name="debug_destination_reset_button">目的地を初期値に戻す</string>
     <string name="debug_destination_edit_title">目的地を編集</string>
     <string name="debug_destination_edit_message">緯度/経度で入力</string>
     <string name="debug_destination_saved">設定を保存しました</string>
     <string name="debug_destination_reset">設定を初期値に戻しました</string>
     <string name="debug_destination_mode_default">現在値: %1$s, %2$s</string>
     <string name="debug_destination_mode_override">現在値: %1$s, %2$s</string>
-    <string name="debug_compass_mode_title">コンパス方式</string>
-    <string name="debug_compass_mode_rotation_vector">標準 (Rotation Vector)</string>
-    <string name="debug_compass_mode_legacy">従来方式 (Legacy Orientation)</string>
 </resources>
 

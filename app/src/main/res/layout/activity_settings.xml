@@ -227,16 +227,85 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans_jp"
-                        android:text="@string/widget_settings_title"
-                        android:textColor="@color/expressive_on_surface"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_jp"
+                    android:text="@string/compass_settings_title"
+                    android:textColor="@color/expressive_on_surface"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                    <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/noto_sans_jp"
+                    android:text="@string/compass_settings_help"
+                    android:textColor="@color/expressive_on_surface_variant"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="6dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/compassLegacyModeToggleTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/noto_sans_jp"
+                            android:text="@string/compass_legacy_mode_title"
+                            android:textColor="@color/expressive_on_surface"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/compassLegacyModeToggleHelp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:fontFamily="@font/noto_sans_jp"
+                            android:text="@string/compass_legacy_mode_summary"
+                            android:textColor="@color/expressive_on_surface_variant"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/compassLegacyModeSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        app:useMaterialThemeColors="true" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/widget_bg"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_jp"
+                    android:text="@string/widget_settings_title"
+                    android:textColor="@color/expressive_on_surface"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
@@ -245,16 +314,7 @@
                         android:textColor="@color/expressive_on_surface_variant"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/noto_sans_jp"
-                        android:text="@string/widget_bearing_mode_title"
-                        android:textColor="@color/expressive_primary"
-                        android:textSize="13sp" />
-
-                    <RadioGroup
+                <RadioGroup
                         android:id="@+id/widgetBearingModeGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -672,35 +732,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="@string/debug_destination_reset_button" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/noto_sans_jp"
-                        android:text="@string/debug_compass_mode_title"
-                        android:textColor="@color/expressive_primary"
-                        android:textSize="13sp" />
-
-                    <RadioGroup
-                        android:id="@+id/debugCompassModeGroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:orientation="vertical">
-
-                        <RadioButton
-                            android:id="@+id/debugCompassRotationVector"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/debug_compass_mode_rotation_vector" />
-
-                        <RadioButton
-                            android:id="@+id/debugCompassLegacy"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/debug_compass_mode_legacy" />
-                    </RadioGroup>
 
                     <Button
                         android:id="@+id/debugReachedButton"

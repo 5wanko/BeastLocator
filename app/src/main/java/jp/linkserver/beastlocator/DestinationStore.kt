@@ -15,16 +15,7 @@ enum class WidgetBearingMode(val prefValue: String) {
     }
 }
 
-enum class CompassSensorMode(val prefValue: String) {
-    ROTATION_VECTOR("rotation_vector"),
-    LEGACY_ORIENTATION("legacy_orientation");
 
-    companion object {
-        fun fromPref(value: String?): CompassSensorMode {
-            return entries.firstOrNull { it.prefValue == value } ?: ROTATION_VECTOR
-        }
-    }
-}
 
 class DestinationStore(context: Context) {
     private val prefs = context.getSharedPreferences("destination_store", Context.MODE_PRIVATE)
@@ -219,12 +210,12 @@ class DestinationStore(context: Context) {
         prefs.edit().putString(KEY_WIDGET_BEARING_MODE, mode.prefValue).apply()
     }
 
-    fun getCompassSensorMode(): CompassSensorMode {
-        return CompassSensorMode.fromPref(prefs.getString(KEY_COMPASS_SENSOR_MODE, null))
+    fun isLegacyCompassModeEnabled(): Boolean {
+        return prefs.getBoolean(KEY_LEGACY_COMPASS_MODE_ENABLED, false)
     }
 
-    fun setCompassSensorMode(mode: CompassSensorMode) {
-        prefs.edit().putString(KEY_COMPASS_SENSOR_MODE, mode.prefValue).apply()
+    fun setLegacyCompassModeEnabled(enabled: Boolean) {
+        prefs.edit().putBoolean(KEY_LEGACY_COMPASS_MODE_ENABLED, enabled).apply()
     }
 
     fun isLandOnlyDestinationEnabled(): Boolean =
@@ -365,7 +356,7 @@ class DestinationStore(context: Context) {
         private const val KEY_ARRIVAL_NOTIFICATION_ENABLED = "arrival_notification_enabled"
         private const val KEY_WIDGET_BACKGROUND_UPDATE_ENABLED = "widget_background_update_enabled"
         private const val KEY_WIDGET_BEARING_MODE = "widget_bearing_mode"
-        private const val KEY_COMPASS_SENSOR_MODE = "compass_sensor_mode"
+        private const val KEY_LEGACY_COMPASS_MODE_ENABLED = "legacy_compass_mode_enabled"
         private const val KEY_LAND_ONLY_DESTINATION_ENABLED = "land_only_destination_enabled"
         private const val KEY_DISTANCE_MASK_BUTTON_VISIBLE = "distance_mask_button_visible"
         private const val KEY_MANUAL_DISTANCE_MASK_ENABLED = "manual_distance_mask_enabled"
