@@ -362,7 +362,7 @@ android {
     }
 
     sourceSets.getByName("main") {
-        assets.srcDir(generatedOssAssetsDir)
+        assets.directories += "generated/oss-assets"
     }
 }
 
