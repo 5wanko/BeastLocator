@@ -718,7 +718,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
                 sensorManager.registerListener(this, mag,   SensorManager.SENSOR_DELAY_UI)
             } else {
-                // どちらかが使えない場合は ROTATION_VECTOR にフォールバック
                 val fallback = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
                 if (fallback != null) {
                     sensorManager.registerListener(this, fallback, SensorManager.SENSOR_DELAY_UI)
