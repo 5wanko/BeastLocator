@@ -15,7 +15,6 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
 }
 
 val revisionStateFile = rootProject.file(".debug-revision-state.properties")
