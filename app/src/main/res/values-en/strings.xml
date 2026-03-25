@@ -71,7 +71,7 @@
     <string name="compass_settings_title">Compass</string>
     <string name="compass_settings_help">Settings for direction display</string>
     <string name="compass_legacy_mode_title">Use legacy compass mode</string>
-    <string name="compass_legacy_mode_summary">The measurement method will be Sensor.TYPE_ORIENTATION.\nTry this if the compass operation is unstable.</string>
+    <string name="compass_legacy_mode_summary">Uses the legacy compass measurement method.\nTry this if the compass is behaving unstable.</string>
     <string name="widget_settings_title">Widget Settings</string>
     <string name="widget_settings_help">Widget orientation display</string>
     <string name="background_location_section_title">Background Updates</string>
@@ -130,7 +130,7 @@
     <string name="about_support_twitter_url">https://x.com/Link_2011A</string>
     <string name="about_update_title">Update Info</string>
     <string name="about_update_latest_format">Current Version: %1$s (%2$d)</string>
-    <string name="about_update_notes">Latest updates:\n• Moved compass mode switching from the debug menu to standard settings.\n• Fixed an issue where background settings remained active even after disabling sound settings.\n• Improved settings text.\n• Other bug fixes.</string>
+    <string name="about_update_notes">Latest Updates:\n• Smoother compass movement\n• Changed the measurement method for the legacy compass mode\n• Added support for edge-to-edge display\n• Internal processing optimizations\n• Other bug fixes</string>
     <string name="oss_screen_title">Open Source Licenses</string>
     <string name="oss_button_open_url">Open URL</string>
     <string name="oss_button_show_text">Show Text</string>

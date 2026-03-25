@@ -709,7 +709,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if (!store.isLegacyCompassModeEnabled()) {
             val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
             if (sensor != null) {
-                sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI)
+                sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME)
             }
         } else {
             val accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
@@ -740,11 +740,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 updateUi(refreshWidgets = false)
             }
             Sensor.TYPE_ACCELEROMETER -> {
-                System.arraycopy(event.values, 0, accelerometerReading, 0, 3)
+                applyLowPassFilter(event.values, accelerometerReading)
                 updateHeadingFromLegacyOrientation()
             }
             Sensor.TYPE_MAGNETIC_FIELD -> {
-                System.arraycopy(event.values, 0, magnetometerReading, 0, 3)
+                applyLowPassFilter(event.values, magnetometerReading)
                 updateHeadingFromLegacyOrientation()
             }
         }
@@ -758,13 +758,28 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         )
         if (!success) return
 
-        SensorManager.getOrientation(rotationMatrix, orientationAngles)
+        val (xAxis, yAxis) = when (getDisplayRotation()) {
+            android.view.Surface.ROTATION_90 -> Pair(SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X)
+            android.view.Surface.ROTATION_180 -> Pair(SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y)
+            android.view.Surface.ROTATION_270 -> Pair(SensorManager.AXIS_MINUS_Y, SensorManager.AXIS_X)
+            else -> Pair(SensorManager.AXIS_X, SensorManager.AXIS_Y)
+        }
+        SensorManager.remapCoordinateSystem(
+            rotationMatrix,
+            xAxis,
+            yAxis,
+            remappedRotationMatrix
+        )
+
+        SensorManager.getOrientation(remappedRotationMatrix, orientationAngles)
 
         val azimuthRad = orientationAngles[0]
         if (!azimuthRad.isFinite()) return
 
         val heading = normalizeTo360(Math.toDegrees(azimuthRad.toDouble()).toFloat())
         headingDegrees = if (isCompassSmoothingEnabled && hasHeadingSample) {
+            // Apply a slew rate limit (max 30 degrees per update) to legacy mode 
+            // to ignore sudden spikes and gimbal lock flips.
             smoothAngleDegrees(headingDegrees, heading, 0.10f)
         } else {
             hasHeadingSample = true
@@ -772,6 +787,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
         updateUi(refreshWidgets = false)
     }
+
+    private fun applyLowPassFilter(input: FloatArray, output: FloatArray) {
+        val alpha = 0.10f
+        for (i in 0 until minOf(input.size, output.size)) {
+            output[i] = output[i] + alpha * (input[i] - output[i])
+        }
+    }
+
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
 

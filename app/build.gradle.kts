@@ -334,13 +334,13 @@ android {
         buildConfig = true
     }
 
-    val appVersionName = "0.9.3-Beta" // (開発時バージョン: 1.2.8-IntDev)
+    val appVersionName = "0.9.4-Beta" // (開発時バージョン: 1.2.9-IntDev)
 
     defaultConfig {
         applicationId = "jp.linkserver.beastlocator"
         minSdk = 28
         targetSdk = 36
-        versionCode = 202603251   // 2026, 03, 25, 1(年、月、日、その日のうちの何個目)
+        versionCode = 202603261   // 2026, 03, 26, 1(年、月、日、その日のうちの何個目)
         versionName = appVersionName
         buildConfigField("String", "REVISION_ID", "\"$revisionId\"")
     }
@@ -361,7 +361,7 @@ android {
     }
 
     sourceSets.getByName("main") {
-        assets.directories += "generated/oss-assets"
+        assets.srcDirs("build/generated/oss-assets")
     }
 }
 
