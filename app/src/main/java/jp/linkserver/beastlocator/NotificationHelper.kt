@@ -204,7 +204,7 @@ object NotificationHelper {
         ) || invokeExact(
             progressStyle,
             "setProgress",
-            arrayOf(java.lang.Float::class.java),
+            arrayOf(Float.Companion::class.java),
             arrayOf(fraction)
         )
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    android:padding="20dp">
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:clipChildren="false"
+		android:clipToPadding="false"
+		android:fitsSystemWindows="true">
 
     <ImageButton
         android:id="@+id/settingsButton"
@@ -15,10 +15,10 @@
         android:background="@drawable/bg_icon_button"
         android:contentDescription="@string/settings"
         android:padding="10dp"
-        app:tint="@color/expressive_on_surface"
         android:src="@drawable/ic_settings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/expressive_on_surface" />
 
     <ImageButton
         android:id="@+id/distanceMaskToggleButton"
@@ -29,10 +29,10 @@
         android:contentDescription="@string/distance_mask_button_content_description_off"
         android:padding="10dp"
         android:src="@drawable/ic_visibility_off"
-        app:tint="@color/expressive_on_surface"
         app:layout_constraintBottom_toBottomOf="@id/settingsButton"
         app:layout_constraintEnd_toStartOf="@id/settingsButton"
-        app:layout_constraintTop_toTopOf="@id/settingsButton" />
+        app:layout_constraintTop_toTopOf="@id/settingsButton"
+        app:tint="@color/expressive_on_surface" />
 
     <LinearLayout
         android:id="@+id/centerContent"
@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,6 +85,7 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:orientation="vertical"
+        android:padding="20dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -138,7 +140,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="22dp"
             android:text="@string/create_next_destination" />
-    </LinearLayout>
 
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
