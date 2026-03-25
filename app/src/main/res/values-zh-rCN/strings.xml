@@ -68,6 +68,10 @@
     <string name="live_update_start_distance_value_m">%1$d m</string>
     <string name="live_update_start_distance_value_km">%.1f km</string>
     <string name="live_update_start_distance_unsupported">进度起始距离设置仅支持 Android 16+。</string>
+    <string name="compass_settings_title">指南针</string>
+    <string name="compass_settings_help">关于方向显示的设置</string>
+    <string name="compass_legacy_mode_title">使用旧版指南针模式</string>
+    <string name="compass_legacy_mode_summary">测量方式将变为 Sensor.TYPE_ORIENTATION。\n如果指南针运行不稳定，请尝试开启此选项。</string>
     <string name="widget_settings_title">微件设置</string>
     <string name="widget_settings_help">微件方位显示</string>
     <string name="background_location_section_title">后台更新</string>
@@ -88,7 +92,7 @@
     <string name="experimental_settings_screen_help">这些是未来计划加入的功能。</string>
     <string name="experimental_language_title">语言设置</string>
     <string name="experimental_language_help">本地化相关设置</string>
-    <string name="experimental_language_toggle">使用日语以外的语言</string>
+    <string name="experimental_language_toggle">启用日语以外的语言</string>
     <string name="experimental_language_toggle_help">目前支持简体中文和英语。</string>
     <string name="experimental_language_open_settings">前往语言设置</string>
     <string name="experimental_compass_title">指南针</string>
@@ -126,7 +130,7 @@
     <string name="about_support_twitter_url">https://x.com/Link_2011A</string>
     <string name="about_update_title">更新信息</string>
     <string name="about_update_latest_format">当前版本: %1$s (%2$d)</string>
-    <string name="about_update_notes">最新更新内容：\n• 优化了野兽先辈动作的平滑处理\n• 改进了此前过短的小部件更新间隔\n• 将定期播放咆哮的功能范围更改为 100m 至 5km 内可用\n• 其他缺陷修复</string>
+    <string name="about_update_notes">最新更新内容：\n• 将指南针模式切换功能从调试菜单移至常规设置\n• 修复了开启声音设置后，即使将其禁用，后台设置仍保持生效的问题\n• 优化设置文本\n• 其他 Bug 修复</string>
     <string name="oss_screen_title">开源许可</string>
     <string name="oss_button_open_url">打开 URL</string>
     <string name="oss_button_show_text">显示正文</string>
@@ -195,15 +199,12 @@
     <string name="debug_missing_location">未获取当前位置</string>
     <string name="debug_approach_out_of_range">无法在目的地 50m 范围内启动</string>
     <string name="debug_destination_override_title">额外调试设置</string>
-    <string name="debug_destination_edit_button">编辑数值</string>
-    <string name="debug_destination_reset_button">还原初始值</string>
+    <string name="debug_destination_edit_button">编辑目的地坐标</string>
+    <string name="debug_destination_reset_button">重置目的地为默认值</string>
     <string name="debug_destination_edit_title">编辑目的地</string>
     <string name="debug_destination_edit_message">以经纬度形式输入</string>
     <string name="debug_destination_saved">已保存设置。</string>
     <string name="debug_destination_reset">已还原设置初始值。</string>
     <string name="debug_destination_mode_default">当前值: %1$s, %2$s</string>
     <string name="debug_destination_mode_override">当前值: %1$s, %2$s</string>
-    <string name="debug_compass_mode_title">指南针方式</string>
-    <string name="debug_compass_mode_rotation_vector">标准 (Rotation Vector)</string>
-    <string name="debug_compass_mode_legacy">传统方式 (Legacy Orientation)</string>
 </resources>

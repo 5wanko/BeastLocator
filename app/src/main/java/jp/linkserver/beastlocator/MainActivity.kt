@@ -703,9 +703,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private fun registerCompass() {
         sensorManager.unregisterListener(this)
-        val preferredType = when (store.getCompassSensorMode()) {
-            CompassSensorMode.ROTATION_VECTOR -> Sensor.TYPE_ROTATION_VECTOR
-            CompassSensorMode.LEGACY_ORIENTATION -> Sensor.TYPE_ORIENTATION
+        val preferredType = if (store.isLegacyCompassModeEnabled()) {
+            Sensor.TYPE_ORIENTATION
+        } else {
+            Sensor.TYPE_ROTATION_VECTOR
         }
         val fallbackType = if (preferredType == Sensor.TYPE_ROTATION_VECTOR) {
             Sensor.TYPE_ORIENTATION

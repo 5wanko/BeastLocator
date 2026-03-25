@@ -68,6 +68,10 @@
     <string name="live_update_start_distance_value_m">%1$d m</string>
     <string name="live_update_start_distance_value_km">%.1f km</string>
     <string name="live_update_start_distance_unsupported">Start distance setting is available on Android 16+.</string>
+    <string name="compass_settings_title">Compass</string>
+    <string name="compass_settings_help">Settings for direction display</string>
+    <string name="compass_legacy_mode_title">Use legacy compass mode</string>
+    <string name="compass_legacy_mode_summary">The measurement method will be Sensor.TYPE_ORIENTATION.\nTry this if the compass operation is unstable.</string>
     <string name="widget_settings_title">Widget Settings</string>
     <string name="widget_settings_help">Widget orientation display</string>
     <string name="background_location_section_title">Background Updates</string>
@@ -88,7 +92,7 @@
     <string name="experimental_settings_screen_help">Features planned for future release.</string>
     <string name="experimental_language_title">Language Settings</string>
     <string name="experimental_language_help">Localization settings</string>
-    <string name="experimental_language_toggle">Use non-Japanese languages</string>
+    <string name="experimental_language_toggle">Enable languages other than Japanese</string>
     <string name="experimental_language_toggle_help">Currently supports Simplified Chinese and English.</string>
     <string name="experimental_language_open_settings">Go to Language Settings</string>
     <string name="experimental_compass_title">Compass</string>
@@ -126,7 +130,7 @@
     <string name="about_support_twitter_url">https://x.com/Link_2011A</string>
     <string name="about_update_title">Update Info</string>
     <string name="about_update_latest_format">Current Version: %1$s (%2$d)</string>
-    <string name="about_update_notes">Latest Updates:\n• Improved the smoothing process for Yajuu Senpai\'s movements.\n• Optimized the widget update interval, which was previously too short.\n• Changed the periodic roar feature to be available within a range of 100m to 5km.\n• Other bug fixes.</string>
+    <string name="about_update_notes">Latest updates:\n• Moved compass mode switching from the debug menu to standard settings.\n• Fixed an issue where background settings remained active even after disabling sound settings.\n• Improved settings text.\n• Other bug fixes.</string>
     <string name="oss_screen_title">Open Source Licenses</string>
     <string name="oss_button_open_url">Open URL</string>
     <string name="oss_button_show_text">Show Text</string>
@@ -195,15 +199,12 @@
     <string name="debug_missing_location">Current location not acquired.</string>
     <string name="debug_approach_out_of_range">Cannot start within 50m of destination.</string>
     <string name="debug_destination_override_title">Extra Debug Settings</string>
-    <string name="debug_destination_edit_button">Edit Value</string>
-    <string name="debug_destination_reset_button">Reset to Default</string>
+    <string name="debug_destination_edit_button">Edit destination coordinates</string>
+    <string name="debug_destination_reset_button">Reset destination to default</string>
     <string name="debug_destination_edit_title">Edit Destination</string>
     <string name="debug_destination_edit_message">Enter Latitude/Longitude</string>
     <string name="debug_destination_saved">Settings saved.</string>
     <string name="debug_destination_reset">Settings reset to default.</string>
     <string name="debug_destination_mode_default">Current: %1$s, %2$s</string>
     <string name="debug_destination_mode_override">Current: %1$s, %2$s</string>
-    <string name="debug_compass_mode_title">Compass Method</string>
-    <string name="debug_compass_mode_rotation_vector">Standard (Rotation Vector)</string>
-    <string name="debug_compass_mode_legacy">Legacy (Legacy Orientation)</string>
 </resources>
