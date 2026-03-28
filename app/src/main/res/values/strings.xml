@@ -130,7 +130,7 @@
     <string name="about_support_twitter_url" translatable="false">https://x.com/Link_2011A</string>
     <string name="about_update_title">更新情報</string>
     <string name="about_update_latest_format">現在のバージョン: %1$s (%2$d)</string>
-    <string name="about_update_notes">最新の更新内容:\n• コンパスの動きをより滑らかに変更\n• 従来方式モードでのコンパスの方式を変更\n• edge to edge表示に対応\n• 内部処理の最適化\n• その他のバグ修正</string>
+    <string name="about_update_notes">最新の更新内容:\n• 中国語の翻訳を改善\n• サポートする最小Androidバージョンを引き下げ(9 → 8.0)\n• その他のバグ修正</string>
     <string name="oss_screen_title">オープンソースライセンス</string>
     <string name="oss_button_open_url">URLを開く</string>
     <string name="oss_button_show_text">本文を表示</string>

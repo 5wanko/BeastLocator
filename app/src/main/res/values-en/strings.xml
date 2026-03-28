@@ -130,7 +130,7 @@
     <string name="about_support_twitter_url">https://x.com/Link_2011A</string>
     <string name="about_update_title">Update Info</string>
     <string name="about_update_latest_format">Current Version: %1$s (%2$d)</string>
-    <string name="about_update_notes">Latest Updates:\n• Smoother compass movement\n• Changed the measurement method for the legacy compass mode\n• Added support for edge-to-edge display\n• Internal processing optimizations\n• Other bug fixes</string>
+    <string name="about_update_notes">Latest updates:\n• Improved Chinese translations\n• Lowered the minimum supported Android version (9 → 8.0)\n• Other bug fixes</string>
     <string name="oss_screen_title">Open Source Licenses</string>
     <string name="oss_button_open_url">Open URL</string>
     <string name="oss_button_show_text">Show Text</string>

@@ -334,13 +334,13 @@ android {
         buildConfig = true
     }
 
-    val appVersionName = "0.9.4-Beta" // (開発時バージョン: 1.2.9-IntDev)
+    val appVersionName = "0.9.5-Beta" // (開発時バージョン: 1.2.10-IntDev)
 
     defaultConfig {
         applicationId = "jp.linkserver.beastlocator"
-        minSdk = 28
+        minSdk = 26
         targetSdk = 36
-        versionCode = 202603261   // 2026, 03, 26, 1(年、月、日、その日のうちの何個目)
+        versionCode = 202603281   // 2026, 03, 28, 1(年、月、日、その日のうちの何個目)
         versionName = appVersionName
         buildConfigField("String", "REVISION_ID", "\"$revisionId\"")
     }
