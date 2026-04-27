@@ -52,6 +52,7 @@ Android 8.0 (API 26)以上であれば使用可能です
 <br>
 
 - Nothing Phone (2) LineageOS 22.2-20260105-GAPPS-EXT4-GSI
+- Rakuten mini crDroid 10.1 UQ1A.240105.004
 
 ## スクリーンショット
 <img width="300" alt="Screenshot_20260324-014444" src="https://github.com/user-attachments/assets/149500da-c95a-4570-ad4e-a92b4ba7bfb4" />
