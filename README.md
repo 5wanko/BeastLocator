@@ -47,6 +47,7 @@ Stableビルドでは隠し機能とする予定ですが、Beta では設定画
 <br>
 
 ## スクリーンショット
-<img width="300" alt="Screenshot_20260324-014444" src="https://github.com/user-attachments/assets/149500da-c95a-4570-ad4e-a92b4ba7bfb4" />
-<img width="300" alt="Screenshot_20260324-014636" src="https://github.com/user-attachments/assets/6aeb959f-687b-4a89-827d-57560a9f8498" />
-<img width="300" alt="Screenshot_20260324-014632" src="https://github.com/user-attachments/assets/ba14afeb-4ec7-4ac1-b381-45f0939995fa" />
+<img width="300" height="300" alt="IMG_8694" src="https://github.com/user-attachments/assets/7c992420-43d1-4476-8996-b8684c25fb43" />
+<img width="300" height="400" alt="IMG_8701" src="https://github.com/user-attachments/assets/a4e11496-2796-46db-9873-1982c3280a4a" />
+<img width="300" height="400" alt="IMG_8703" src="https://github.com/user-attachments/assets/0b01b0b4-a500-4229-a35d-0e2b538cfee9" />
+<img width="300" height="400" alt="IMG_8702" src="https://github.com/user-attachments/assets/a00d86da-c073-4804-99c8-70d6b3936d99" />
