@@ -8,7 +8,7 @@ enum WidgetBearingMode: String {
 
 class DestinationStore: ObservableObject {
     static let shared = DestinationStore()
-    private let prefs = UserDefaults.standard
+    private let prefs = UserDefaults(suiteName: "group.jp.linkserver.beastlocator") ?? UserDefaults.standard
     
     private init() {}
     

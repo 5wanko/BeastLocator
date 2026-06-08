@@ -203,3 +203,6 @@
 "debug_destination_reset" = "設定を初期値に戻しました";
 "debug_destination_mode_default" = "現在値: %1$@, %2$@";
 "debug_destination_mode_override" = "現在値: %1$@, %2$@";
+"map_navigation_button" = "地図アプリで開く";
+"navigation_title" = "ナビゲーション";
+"cancel" = "キャンセル";

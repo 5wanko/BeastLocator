@@ -3,171 +3,267 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B4B2190C25D4AB092A6BF18 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98388E6CB7BE489F8DEB7CD4 /* MainView.swift */; };
-		14C48995DF5A407092BE9A7B /* distance_114514km.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CD9C2BD8C0634D2BB6CEB494 /* distance_114514km.mp3 */; };
-		1DE2F4081B9A45688CC55190 /* ExperimentalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766B9C02430E48B18C681AD0 /* ExperimentalSettingsView.swift */; };
-		284B5D558E944E37830FF883 /* OssLicensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E2863C3E2741D88E848783 /* OssLicensesView.swift */; };
-		46C0551001E24F33B578CABC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90A2F398AF747B29B5C33C3 /* SettingsView.swift */; };
-		4DD7983CB4954DE0895091F3 /* BeastLocatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAADC49C05541A89DC1BCBC /* BeastLocatorApp.swift */; };
-		635DBB467FFC4429A9B2650F /* distance_interval_kankaku.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2C47931F516848DE9C613091 /* distance_interval_kankaku.mp3 */; };
-		73395519644B42C6B1F35D7D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 688C1B5A25624A52997C2114 /* Localizable.strings */; };
-		776051207C444A8698B6A99F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B656659F4E54F29AE820DAF /* Assets.xcassets */; };
-		79E58C3FEC114AC9BA7D34BC /* arrival_0km.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6E03D2F7A9024E2AB2F6656E /* arrival_0km.wav */; };
-		8E312C073972420DBE77C243 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1093B1C3E34F44F3ACC9467F /* LocalNotificationManager.swift */; };
-		8F52AD2C2B874FC4A547A220 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92122BB321E4FD2AE242853 /* WelcomeView.swift */; };
-		9F6EADA165BA4EC28C90C664 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6B1C6D2D14E4F9BAF686B /* AudioPlayer.swift */; };
-		A38E70A952F9455EBA4FB91D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E93A817CB949E2820EF3AB /* LocationManager.swift */; };
-		A8E2319E05EE44FF87ADA35D /* GeoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347BA72FC28F4693B8075668 /* GeoUtils.swift */; };
-		BA832DAAEB72477D9C705918 /* DestinationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384E95F6EFB44FEEB5086DA6 /* DestinationStore.swift */; };
-		E1A73959F780471C8C8BD947 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04D95617BC34268830F5352 /* AboutView.swift */; };
+		0FD5A072F9A54BE6BF577542 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4AC04526D4C5385104B15 /* LocationManager.swift */; };
+		140CDF095D6544D9BCBB7E72 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F45EC6CE04C95A5BB07DE /* AudioPlayer.swift */; };
+		1441B414F1D547559B1A9C6B /* distance_interval_kankaku.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E1D16D2D1A24A97A5A8249C /* distance_interval_kankaku.mp3 */; };
+		458BEA4B8FDF4A1B89E55E3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1880A77BC7C347E3A3CA1133 /* Assets.xcassets */; };
+		6E1087E440664A0A8B4A6C8D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE5F1DF5A45C41758EB69B08 /* Localizable.strings */; };
+		792D313C1E384B09A536209D /* DestinationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EC8B7353964D549EF5277B /* DestinationStore.swift */; };
+		A9F73C90EA4746DF81C7016D /* OssLicensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C20289975B4F29B98F5282 /* OssLicensesView.swift */; };
+		B530AD000EA6437499A5C55F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC608362A60C4EE2B9118DF5 /* WelcomeView.swift */; };
+		B98515A54A8542F18E02CBFA /* ExperimentalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B3A42C8E48B8925EAB4D /* ExperimentalSettingsView.swift */; };
+		B9C0D78694924F38A68B1319 /* GeoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B9FA497D344EFE87865391 /* GeoUtils.swift */; };
+		D21F2432E3714324B2A34C15 /* distance_114514km.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B77B68D10A5843219288946A /* distance_114514km.mp3 */; };
+		DBA226C0B9664907AAABE986 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1F190F8AFE4955A01DB0C7 /* LocalNotificationManager.swift */; };
+		DF6C6584FC44405E86974BBF /* BeastLocatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8D81106AC40608A266FC3 /* BeastLocatorApp.swift */; };
+		E0AE508DB1AB437881C17BAC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A84E43638EA483496166BD7 /* SettingsView.swift */; };
+		E21DEBAA2FD679A700450BED /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E21DEBA92FD679A700450BED /* WidgetKit.framework */; };
+		E21DEBAC2FD679A700450BED /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E21DEBAB2FD679A700450BED /* SwiftUI.framework */; };
+		E21DEBB92FD679A800450BED /* BeastLocatorWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E21DEBA72FD679A700450BED /* BeastLocatorWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EDC20CE13E7746EFBA4333C1 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA391AFD1B3342158E870A9F /* AboutView.swift */; };
+		FAFDC80221E64B7F9BF52059 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E20C96D1DC404A9882A633 /* MainView.swift */; };
+		FC728D4095794609B2304C59 /* arrival_0km.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C1B095416A04ECDB9B763FC /* arrival_0km.wav */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E21DEBB72FD679A800450BED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD94BA239C54B5EA765BB4D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E21DEBA62FD679A700450BED;
+			remoteInfo = BeastLocatorWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E21DEBBE2FD679A800450BED /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E21DEBB92FD679A800450BED /* BeastLocatorWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		03E2863C3E2741D88E848783 /* OssLicensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OssLicensesView.swift; path = Views/OssLicensesView.swift; sourceTree = "<group>"; };
-		1093B1C3E34F44F3ACC9467F /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocalNotificationManager.swift; path = Utilities/LocalNotificationManager.swift; sourceTree = "<group>"; };
-		1AAADC49C05541A89DC1BCBC /* BeastLocatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeastLocatorApp.swift; sourceTree = "<group>"; };
-		2B656659F4E54F29AE820DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2C47931F516848DE9C613091 /* distance_interval_kankaku.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = distance_interval_kankaku.mp3; path = Resources/distance_interval_kankaku.mp3; sourceTree = "<group>"; };
-		347BA72FC28F4693B8075668 /* GeoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GeoUtils.swift; path = Utilities/GeoUtils.swift; sourceTree = "<group>"; };
-		384E95F6EFB44FEEB5086DA6 /* DestinationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DestinationStore.swift; path = Models/DestinationStore.swift; sourceTree = "<group>"; };
-		3FF6B1C6D2D14E4F9BAF686B /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioPlayer.swift; path = Utilities/AudioPlayer.swift; sourceTree = "<group>"; };
-		48E93A817CB949E2820EF3AB /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Models/LocationManager.swift; sourceTree = "<group>"; };
-		6E03D2F7A9024E2AB2F6656E /* arrival_0km.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = arrival_0km.wav; path = Resources/arrival_0km.wav; sourceTree = "<group>"; };
-		766B9C02430E48B18C681AD0 /* ExperimentalSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExperimentalSettingsView.swift; path = Views/ExperimentalSettingsView.swift; sourceTree = "<group>"; };
-		81C0D28E100D446E86A14FBB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		98388E6CB7BE489F8DEB7CD4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = Views/MainView.swift; sourceTree = "<group>"; };
-		9C98012D014B4A2490FF1781 /* BeastLocator-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BeastLocator-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C04D95617BC34268830F5352 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AboutView.swift; path = Views/AboutView.swift; sourceTree = "<group>"; };
-		C92122BB321E4FD2AE242853 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WelcomeView.swift; path = Views/WelcomeView.swift; sourceTree = "<group>"; };
-		CD9C2BD8C0634D2BB6CEB494 /* distance_114514km.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = distance_114514km.mp3; path = Resources/distance_114514km.mp3; sourceTree = "<group>"; };
-		D78DCA66D1BF4B29873CEEDF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D90A2F398AF747B29B5C33C3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
-		E9670107D5C047E4B53B56D1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		15E20C96D1DC404A9882A633 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = Views/MainView.swift; sourceTree = "<group>"; };
+		1674B3A42C8E48B8925EAB4D /* ExperimentalSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExperimentalSettingsView.swift; path = Views/ExperimentalSettingsView.swift; sourceTree = "<group>"; };
+		1880A77BC7C347E3A3CA1133 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		207A29DAC7404CD0BB563AC2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		20EC8B7353964D549EF5277B /* DestinationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DestinationStore.swift; path = Models/DestinationStore.swift; sourceTree = "<group>"; };
+		3E1D16D2D1A24A97A5A8249C /* distance_interval_kankaku.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = distance_interval_kankaku.mp3; path = Resources/distance_interval_kankaku.mp3; sourceTree = "<group>"; };
+		5A84E43638EA483496166BD7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
+		6A1F190F8AFE4955A01DB0C7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocalNotificationManager.swift; path = Utilities/LocalNotificationManager.swift; sourceTree = "<group>"; };
+		6B0125A5AEEC49DF9CF53A66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		78B9FA497D344EFE87865391 /* GeoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GeoUtils.swift; path = Utilities/GeoUtils.swift; sourceTree = "<group>"; };
+		79C20289975B4F29B98F5282 /* OssLicensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OssLicensesView.swift; path = Views/OssLicensesView.swift; sourceTree = "<group>"; };
+		7C1B095416A04ECDB9B763FC /* arrival_0km.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = arrival_0km.wav; path = Resources/arrival_0km.wav; sourceTree = "<group>"; };
+		807F45EC6CE04C95A5BB07DE /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioPlayer.swift; path = Utilities/AudioPlayer.swift; sourceTree = "<group>"; };
+		A823F8D670104A72AD630DEB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AF6462A462EA474A92236A99 /* BeastLocator-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BeastLocator-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B77B68D10A5843219288946A /* distance_114514km.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = distance_114514km.mp3; path = Resources/distance_114514km.mp3; sourceTree = "<group>"; };
+		C3D4AC04526D4C5385104B15 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Models/LocationManager.swift; sourceTree = "<group>"; };
+		DA391AFD1B3342158E870A9F /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AboutView.swift; path = Views/AboutView.swift; sourceTree = "<group>"; };
+		DC608362A60C4EE2B9118DF5 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WelcomeView.swift; path = Views/WelcomeView.swift; sourceTree = "<group>"; };
+		E21DEBA72FD679A700450BED /* BeastLocatorWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BeastLocatorWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E21DEBA92FD679A700450BED /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		E21DEBAB2FD679A700450BED /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		E21DEBC32FD67A6100450BED /* BeastLocatorWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeastLocatorWidgetExtension.entitlements; sourceTree = "<group>"; };
+		E21DEBC42FD67A6F00450BED /* BeastLocator-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BeastLocator-iOS.entitlements"; sourceTree = "<group>"; };
+		EAD8D81106AC40608A266FC3 /* BeastLocatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeastLocatorApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E21DEBBA2FD679A800450BED /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E21DEBA62FD679A700450BED /* BeastLocatorWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		E21DEBAD2FD679A700450BED /* BeastLocatorWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E21DEBBA2FD679A800450BED /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BeastLocatorWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		0CEABB63DF4C486A9CDF570A /* Frameworks */ = {
+		AA9E03EE1CD04999830A0766 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E21DEBA42FD679A700450BED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E21DEBAC2FD679A700450BED /* SwiftUI.framework in Frameworks */,
+				E21DEBAA2FD679A700450BED /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		054C8C5DA32E4B20BF553919 = {
+		073C3871E87545CCA230507C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C229511D5D684E6E8E1C3A74 /* BeastLocator-iOS */,
-				B8B42DBAD3CC471EBDB3C675 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		27F55A7125EE4EC2826DB825 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				347BA72FC28F4693B8075668 /* GeoUtils.swift */,
-				3FF6B1C6D2D14E4F9BAF686B /* AudioPlayer.swift */,
-				1093B1C3E34F44F3ACC9467F /* LocalNotificationManager.swift */,
-			);
-			name = Utilities;
-			sourceTree = "<group>";
-		};
-		45C836A118844293927CDB0C /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6E03D2F7A9024E2AB2F6656E /* arrival_0km.wav */,
-				CD9C2BD8C0634D2BB6CEB494 /* distance_114514km.mp3 */,
-				2C47931F516848DE9C613091 /* distance_interval_kankaku.mp3 */,
-				2B656659F4E54F29AE820DAF /* Assets.xcassets */,
-				688C1B5A25624A52997C2114 /* Localizable.strings */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		5730CFA5A9454AA3A65A912C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				384E95F6EFB44FEEB5086DA6 /* DestinationStore.swift */,
-				48E93A817CB949E2820EF3AB /* LocationManager.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		792A9D7B924847FB8878685E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				C92122BB321E4FD2AE242853 /* WelcomeView.swift */,
-				98388E6CB7BE489F8DEB7CD4 /* MainView.swift */,
-				D90A2F398AF747B29B5C33C3 /* SettingsView.swift */,
-				766B9C02430E48B18C681AD0 /* ExperimentalSettingsView.swift */,
-				C04D95617BC34268830F5352 /* AboutView.swift */,
-				03E2863C3E2741D88E848783 /* OssLicensesView.swift */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		B8B42DBAD3CC471EBDB3C675 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9C98012D014B4A2490FF1781 /* BeastLocator-iOS.app */,
+				AF6462A462EA474A92236A99 /* BeastLocator-iOS.app */,
+				E21DEBA72FD679A700450BED /* BeastLocatorWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C229511D5D684E6E8E1C3A74 /* BeastLocator-iOS */ = {
+		16AB3DFE722E4DBE9AFFF557 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1AAADC49C05541A89DC1BCBC /* BeastLocatorApp.swift */,
-				5730CFA5A9454AA3A65A912C /* Models */,
-				792A9D7B924847FB8878685E /* Views */,
-				27F55A7125EE4EC2826DB825 /* Utilities */,
-				45C836A118844293927CDB0C /* Resources */,
+				20EC8B7353964D549EF5277B /* DestinationStore.swift */,
+				C3D4AC04526D4C5385104B15 /* LocationManager.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		80FD1A3C11B54DD3A2AAE2DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DC608362A60C4EE2B9118DF5 /* WelcomeView.swift */,
+				15E20C96D1DC404A9882A633 /* MainView.swift */,
+				5A84E43638EA483496166BD7 /* SettingsView.swift */,
+				1674B3A42C8E48B8925EAB4D /* ExperimentalSettingsView.swift */,
+				DA391AFD1B3342158E870A9F /* AboutView.swift */,
+				79C20289975B4F29B98F5282 /* OssLicensesView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		992958E7FC5C4BC58A012171 /* BeastLocator-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				E21DEBC42FD67A6F00450BED /* BeastLocator-iOS.entitlements */,
+				EAD8D81106AC40608A266FC3 /* BeastLocatorApp.swift */,
+				16AB3DFE722E4DBE9AFFF557 /* Models */,
+				80FD1A3C11B54DD3A2AAE2DF /* Views */,
+				C44BD8604AFC40ECBB8D8BA2 /* Utilities */,
+				ECC4B97A56864E6EBBFFAE65 /* Resources */,
 			);
 			path = "BeastLocator-iOS";
+			sourceTree = "<group>";
+		};
+		C44BD8604AFC40ECBB8D8BA2 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				78B9FA497D344EFE87865391 /* GeoUtils.swift */,
+				807F45EC6CE04C95A5BB07DE /* AudioPlayer.swift */,
+				6A1F190F8AFE4955A01DB0C7 /* LocalNotificationManager.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		E018A71E2AE34D29B7B7C7C4 = {
+			isa = PBXGroup;
+			children = (
+				E21DEBC32FD67A6100450BED /* BeastLocatorWidgetExtension.entitlements */,
+				992958E7FC5C4BC58A012171 /* BeastLocator-iOS */,
+				E21DEBAD2FD679A700450BED /* BeastLocatorWidget */,
+				E21DEBA82FD679A700450BED /* Frameworks */,
+				073C3871E87545CCA230507C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E21DEBA82FD679A700450BED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E21DEBA92FD679A700450BED /* WidgetKit.framework */,
+				E21DEBAB2FD679A700450BED /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ECC4B97A56864E6EBBFFAE65 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7C1B095416A04ECDB9B763FC /* arrival_0km.wav */,
+				B77B68D10A5843219288946A /* distance_114514km.mp3 */,
+				3E1D16D2D1A24A97A5A8249C /* distance_interval_kankaku.mp3 */,
+				1880A77BC7C347E3A3CA1133 /* Assets.xcassets */,
+				EE5F1DF5A45C41758EB69B08 /* Localizable.strings */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D544A64B7CDD46B4B4C9B0FB /* BeastLocator-iOS */ = {
+		C45EF8C7F94846F697F953F7 /* BeastLocator-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55EF566CA8F14B93BA5F57E3 /* Build configuration list for PBXNativeTarget "BeastLocator-iOS" */;
+			buildConfigurationList = 7AC767A78B7B4621924C0089 /* Build configuration list for PBXNativeTarget "BeastLocator-iOS" */;
 			buildPhases = (
-				FFC8615209494F7988D8A6ED /* Sources */,
-				0CEABB63DF4C486A9CDF570A /* Frameworks */,
-				0955BEB827F2468C85338313 /* Resources */,
+				4B9A24859FC54FB79803CEE3 /* Sources */,
+				AA9E03EE1CD04999830A0766 /* Frameworks */,
+				C3EBFC9870DF4E4F8A8FE553 /* Resources */,
+				E21DEBBE2FD679A800450BED /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E21DEBB82FD679A800450BED /* PBXTargetDependency */,
+			);
+			name = "BeastLocator-iOS";
+			productName = "BeastLocator-iOS";
+			productReference = AF6462A462EA474A92236A99 /* BeastLocator-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E21DEBA62FD679A700450BED /* BeastLocatorWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E21DEBBB2FD679A800450BED /* Build configuration list for PBXNativeTarget "BeastLocatorWidgetExtension" */;
+			buildPhases = (
+				E21DEBA32FD679A700450BED /* Sources */,
+				E21DEBA42FD679A700450BED /* Frameworks */,
+				E21DEBA52FD679A700450BED /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "BeastLocator-iOS";
-			productName = "BeastLocator-iOS";
-			productReference = 9C98012D014B4A2490FF1781 /* BeastLocator-iOS.app */;
-			productType = "com.apple.product-type.application";
+			fileSystemSynchronizedGroups = (
+				E21DEBAD2FD679A700450BED /* BeastLocatorWidget */,
+			);
+			name = BeastLocatorWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = BeastLocatorWidgetExtension;
+			productReference = E21DEBA72FD679A700450BED /* BeastLocatorWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		32E6DC002E6F475BAD39B5E1 /* Project object */ = {
+		1BD94BA239C54B5EA765BB4D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					D544A64B7CDD46B4B4C9B0FB = {
+					C45EF8C7F94846F697F953F7 = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					E21DEBA62FD679A700450BED = {
+						CreatedOnToolsVersion = 26.3;
 					};
 				};
 			};
-			buildConfigurationList = EDFE4A2623F84FA283245879 /* Build configuration list for PBXProject "BeastLocator-iOS" */;
+			buildConfigurationList = 2C203C061917444DBAD88038 /* Build configuration list for PBXProject "BeastLocator-iOS" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = ja;
 			hasScannedForEncodings = 0;
@@ -177,60 +273,83 @@
 				"zh-Hans",
 				Base,
 			);
-			mainGroup = 054C8C5DA32E4B20BF553919;
-			productRefGroup = B8B42DBAD3CC471EBDB3C675 /* Products */;
+			mainGroup = E018A71E2AE34D29B7B7C7C4;
+			productRefGroup = 073C3871E87545CCA230507C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D544A64B7CDD46B4B4C9B0FB /* BeastLocator-iOS */,
+				C45EF8C7F94846F697F953F7 /* BeastLocator-iOS */,
+				E21DEBA62FD679A700450BED /* BeastLocatorWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0955BEB827F2468C85338313 /* Resources */ = {
+		C3EBFC9870DF4E4F8A8FE553 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				776051207C444A8698B6A99F /* Assets.xcassets in Resources */,
-				73395519644B42C6B1F35D7D /* Localizable.strings in Resources */,
-				79E58C3FEC114AC9BA7D34BC /* arrival_0km.wav in Resources */,
-				14C48995DF5A407092BE9A7B /* distance_114514km.mp3 in Resources */,
-				635DBB467FFC4429A9B2650F /* distance_interval_kankaku.mp3 in Resources */,
+				458BEA4B8FDF4A1B89E55E3D /* Assets.xcassets in Resources */,
+				6E1087E440664A0A8B4A6C8D /* Localizable.strings in Resources */,
+				FC728D4095794609B2304C59 /* arrival_0km.wav in Resources */,
+				D21F2432E3714324B2A34C15 /* distance_114514km.mp3 in Resources */,
+				1441B414F1D547559B1A9C6B /* distance_interval_kankaku.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E21DEBA52FD679A700450BED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FFC8615209494F7988D8A6ED /* Sources */ = {
+		4B9A24859FC54FB79803CEE3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DD7983CB4954DE0895091F3 /* BeastLocatorApp.swift in Sources */,
-				BA832DAAEB72477D9C705918 /* DestinationStore.swift in Sources */,
-				A38E70A952F9455EBA4FB91D /* LocationManager.swift in Sources */,
-				A8E2319E05EE44FF87ADA35D /* GeoUtils.swift in Sources */,
-				9F6EADA165BA4EC28C90C664 /* AudioPlayer.swift in Sources */,
-				8E312C073972420DBE77C243 /* LocalNotificationManager.swift in Sources */,
-				8F52AD2C2B874FC4A547A220 /* WelcomeView.swift in Sources */,
-				0B4B2190C25D4AB092A6BF18 /* MainView.swift in Sources */,
-				46C0551001E24F33B578CABC /* SettingsView.swift in Sources */,
-				1DE2F4081B9A45688CC55190 /* ExperimentalSettingsView.swift in Sources */,
-				E1A73959F780471C8C8BD947 /* AboutView.swift in Sources */,
-				284B5D558E944E37830FF883 /* OssLicensesView.swift in Sources */,
+				DF6C6584FC44405E86974BBF /* BeastLocatorApp.swift in Sources */,
+				792D313C1E384B09A536209D /* DestinationStore.swift in Sources */,
+				0FD5A072F9A54BE6BF577542 /* LocationManager.swift in Sources */,
+				B9C0D78694924F38A68B1319 /* GeoUtils.swift in Sources */,
+				140CDF095D6544D9BCBB7E72 /* AudioPlayer.swift in Sources */,
+				DBA226C0B9664907AAABE986 /* LocalNotificationManager.swift in Sources */,
+				B530AD000EA6437499A5C55F /* WelcomeView.swift in Sources */,
+				FAFDC80221E64B7F9BF52059 /* MainView.swift in Sources */,
+				E0AE508DB1AB437881C17BAC /* SettingsView.swift in Sources */,
+				B98515A54A8542F18E02CBFA /* ExperimentalSettingsView.swift in Sources */,
+				EDC20CE13E7746EFBA4333C1 /* AboutView.swift in Sources */,
+				A9F73C90EA4746DF81C7016D /* OssLicensesView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E21DEBA32FD679A700450BED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E21DEBB82FD679A800450BED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E21DEBA62FD679A700450BED /* BeastLocatorWidgetExtension */;
+			targetProxy = E21DEBB72FD679A800450BED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		688C1B5A25624A52997C2114 /* Localizable.strings */ = {
+		EE5F1DF5A45C41758EB69B08 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D78DCA66D1BF4B29873CEEDF /* en */,
-				81C0D28E100D446E86A14FBB /* ja */,
-				E9670107D5C047E4B53B56D1 /* zh-Hans */,
+				6B0125A5AEEC49DF9CF53A66 /* en */,
+				A823F8D670104A72AD630DEB /* ja */,
+				207A29DAC7404CD0BB563AC2 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -238,7 +357,114 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3358594E24714A9CB23686D2 /* Debug */ = {
+		1200044AF88749BEB409E2F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_REFS_TO_NON_OBJC_CLASS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUICKTIME_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1400474040E949779E1A5318 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BeastLocator-iOS/BeastLocator-iOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 89C2U39T84;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "BeastLocator-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.9.5;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.linkserver.beastlocator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C6511F3B5C1B4C828AB7F544 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BeastLocator-iOS/BeastLocator-iOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 89C2U39T84;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "BeastLocator-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.9.5;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.linkserver.beastlocator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CD0FBE369F8A458B931EE4D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -299,106 +525,80 @@
 			};
 			name = Debug;
 		};
-		5A8587D1134B489A94BE4F96 /* Release */ = {
+		E21DEBBC2FD679A800450BED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_REFS_TO_NON_OBJC_CLASS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUICKTIME_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		9B8E2A4D170D4535912D22D6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = BeastLocatorWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 89C2U39T84;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "BeastLocator-iOS/Info.plist";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeastLocatorWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BeastLocatorWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.9.5;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.linkserver.beastlocator;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.linkserver.beastlocator.BeastLocatorWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		C4E71F022E804FFB96712CA4 /* Release */ = {
+		E21DEBBD2FD679A800450BED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = BeastLocatorWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 89C2U39T84;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "BeastLocator-iOS/Info.plist";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeastLocatorWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BeastLocatorWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.9.5;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.linkserver.beastlocator;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.linkserver.beastlocator.BeastLocatorWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -407,25 +607,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55EF566CA8F14B93BA5F57E3 /* Build configuration list for PBXNativeTarget "BeastLocator-iOS" */ = {
+		2C203C061917444DBAD88038 /* Build configuration list for PBXProject "BeastLocator-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9B8E2A4D170D4535912D22D6 /* Debug */,
-				C4E71F022E804FFB96712CA4 /* Release */,
+				CD0FBE369F8A458B931EE4D2 /* Debug */,
+				1200044AF88749BEB409E2F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EDFE4A2623F84FA283245879 /* Build configuration list for PBXProject "BeastLocator-iOS" */ = {
+		7AC767A78B7B4621924C0089 /* Build configuration list for PBXNativeTarget "BeastLocator-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3358594E24714A9CB23686D2 /* Debug */,
-				5A8587D1134B489A94BE4F96 /* Release */,
+				1400474040E949779E1A5318 /* Debug */,
+				C6511F3B5C1B4C828AB7F544 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E21DEBBB2FD679A800450BED /* Build configuration list for PBXNativeTarget "BeastLocatorWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E21DEBBC2FD679A800450BED /* Debug */,
+				E21DEBBD2FD679A800450BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 32E6DC002E6F475BAD39B5E1 /* Project object */;
+	rootObject = 1BD94BA239C54B5EA765BB4D /* Project object */;
 }

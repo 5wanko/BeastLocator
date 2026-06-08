@@ -203,3 +203,6 @@
 "debug_destination_reset" = "已还原设置初始值";
 "debug_destination_mode_default" = "当前值: %1$@, %2$@";
 "debug_destination_mode_override" = "当前值: %1$@, %2$@";
+"map_navigation_button" = "在地图中打开";
+"navigation_title" = "导航";
+"cancel" = "取消";

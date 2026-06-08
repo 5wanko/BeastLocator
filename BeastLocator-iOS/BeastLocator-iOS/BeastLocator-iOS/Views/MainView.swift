@@ -6,6 +6,7 @@ struct MainView: View {
     @EnvironmentObject var locationManager: LocationManager
     @State private var showingSettings = false
     @State private var showingWelcome = false
+    @State private var showingMapOptions = false
     
     // Constant offsets & constants matching Android
     private let arrowImageForwardOffsetDegrees: Double = 45.0
@@ -26,6 +27,23 @@ struct MainView: View {
                     // Top Bar (Buttons)
                     HStack {
                         Spacer()
+                        
+                        if !locationManager.waitingForLocation {
+                            Button(action: {
+                                showingMapOptions = true
+                            }) {
+                                Image(systemName: "map.fill")
+                                    .font(.title2)
+                                    .foregroundColor(.white)
+                                    .padding(12)
+                                    .background(Color.white.opacity(0.08))
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        Circle().stroke(Color.white.opacity(0.12), lineWidth: 1)
+                                    )
+                            }
+                            .padding(.trailing, 8)
+                        }
                         
                         if store.isDistanceMaskButtonVisible {
                             Button(action: {
@@ -202,6 +220,15 @@ struct MainView: View {
         .sheet(isPresented: $showingWelcome) {
             WelcomeView()
         }
+        .confirmationDialog(NSLocalizedString("navigation_title", comment: ""), isPresented: $showingMapOptions, titleVisibility: .visible) {
+            Button("Google Maps") {
+                openGoogleMaps()
+            }
+            Button("Apple Maps") {
+                openAppleMaps()
+            }
+            Button(NSLocalizedString("cancel", comment: ""), role: .cancel) {}
+        }
         .onAppear {
             if !store.welcomeCompleted {
                 showingWelcome = true
@@ -299,5 +326,25 @@ struct MainView: View {
         store.isArrivalRearmRequired = true
         LocalNotificationManager.shared.cancelApproachProgress()
         locationManager.processLocationUpdate(current: locationManager.currentLocation ?? fixedDestination)
+    }
+    
+    private func openGoogleMaps() {
+        let dest = store.getDestination()
+        let urlString = "comgooglemaps://?saddr=&daddr=\(dest.latitude),\(dest.longitude)&directionsmode=walking"
+        let webUrlString = "https://www.google.com/maps/dir/?api=1&origin=&destination=\(dest.latitude),\(dest.longitude)&travelmode=walking"
+        
+        if let appUrl = URL(string: urlString), UIApplication.shared.canOpenURL(appUrl) {
+            UIApplication.shared.open(appUrl, options: [:], completionHandler: nil)
+        } else if let webUrl = URL(string: webUrlString) {
+            UIApplication.shared.open(webUrl, options: [:], completionHandler: nil)
+        }
+    }
+    
+    private func openAppleMaps() {
+        let dest = store.getDestination()
+        let urlString = "maps://?saddr=&daddr=\(dest.latitude),\(dest.longitude)&dirflg=w"
+        if let appUrl = URL(string: urlString) {
+            UIApplication.shared.open(appUrl, options: [:], completionHandler: nil)
+        }
     }
 }

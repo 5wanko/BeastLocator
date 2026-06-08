@@ -203,3 +203,6 @@
 "debug_destination_reset" = "Settings reset to default.";
 "debug_destination_mode_default" = "Current: %1$@, %2$@";
 "debug_destination_mode_override" = "Current: %1$@, %2$@";
+"map_navigation_button" = "Open in Maps";
+"navigation_title" = "Navigation";
+"cancel" = "Cancel";

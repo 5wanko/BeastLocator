@@ -1,6 +1,7 @@
 import Foundation
 import CoreLocation
 import Combine
+import WidgetKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
@@ -11,7 +12,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var headingDegrees: Double = 0.0
     @Published var currentLocation: CLLocationCoordinate2D?
     @Published var systemLocationServiceDisabled = false
-    @Published var waitingForLocation = true
+    @Published var waitingForLocation = true {
+        didSet {
+            if waitingForLocation {
+                setWidgetWaiting()
+            }
+        }
+    }
     
     private var hasHeadingSample = false
     private var distance114514SoundPlayed = false
@@ -33,8 +40,15 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         if let lastLocation = store.getLastKnownLocation() {
             self.currentLocation = lastLocation
             self.waitingForLocation = false
+            let destination = store.getDestination()
+            let distance = GeoUtils.shared.distanceMeters(from: lastLocation, to: destination)
+            let bearing = GeoUtils.shared.bearingDegrees(from: lastLocation, to: destination)
+            updateWidgetData(distanceMeters: distance, bearing: bearing)
         } else if store.isDebugDistanceOverrideEnabled {
             self.waitingForLocation = false
+            setWidgetWaiting()
+        } else {
+            setWidgetWaiting()
         }
     }
     
@@ -97,6 +111,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         let destination = store.getDestination()
         let distance = GeoUtils.shared.distanceMeters(from: current, to: destination)
+        let bearing = GeoUtils.shared.bearingDegrees(from: current, to: destination)
         
         if store.isArrivalRearmRequired && distance > arrivalThresholdMeters {
             store.isArrivalRearmRequired = false
@@ -105,6 +120,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         handleArrivalByDistance(destination: destination, distanceMeters: distance)
         updateApproachLiveUpdate(distanceMeters: distance)
         handleSoundTriggers(distanceMeters: distance)
+        updateWidgetData(distanceMeters: distance, bearing: bearing)
         
         previousDistanceMeters = distance
     }
@@ -247,5 +263,39 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         if currentBucket < prev {
             AudioPlayer.shared.playSound(resource: "distance_interval_kankaku.mp3", priority: 1)
         }
+    }
+    
+    private func updateWidgetData(distanceMeters: Double, bearing: Double) {
+        let prefs = UserDefaults(suiteName: "group.jp.linkserver.beastlocator") ?? .standard
+        
+        let distanceStr = GeoUtils.shared.formatDistance(distanceMeters)
+        let cardinal = GeoUtils.shared.cardinalFromBearing(bearing)
+        let directionStr = String(format: NSLocalizedString("direction_label", comment: ""), cardinal)
+        
+        // For Widget, we use absolute bearing (North-up) since real-time heading is not available
+        let relative = bearing - 45.0 // absolute angle pointing to target (adjusted for yjsnpi's 45-degree diagonal offset)
+        
+        prefs.set(distanceStr, forKey: "widget_distance_text")
+        prefs.set(directionStr, forKey: "widget_direction_text")
+        prefs.set(relative, forKey: "widget_rotation_degrees")
+        prefs.set(false, forKey: "widget_waiting_location")
+        prefs.set(store.destinationAnswered, forKey: "widget_destination_answered")
+        prefs.set(store.arrivalDestinationName, forKey: "widget_arrival_destination_name")
+        
+        let dest = store.getDestination()
+        let coordsStr = String(format: NSLocalizedString("arrival_coords_format", comment: ""), dest.latitude, dest.longitude)
+        prefs.set(coordsStr, forKey: "widget_arrival_coords_text")
+        
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+    
+    private func setWidgetWaiting() {
+        let prefs = UserDefaults(suiteName: "group.jp.linkserver.beastlocator") ?? .standard
+        prefs.set(true, forKey: "widget_waiting_location")
+        prefs.set(NSLocalizedString("waiting_location", comment: ""), forKey: "widget_distance_text")
+        prefs.set("", forKey: "widget_direction_text")
+        prefs.set(0.0, forKey: "widget_rotation_degrees")
+        
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }
