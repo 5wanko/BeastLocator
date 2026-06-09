@@ -1,80 +1,90 @@
-//
-//  BeastLocatorWidgetLiveActivity.swift
-//  BeastLocatorWidget
-//
-//  Created by haru on 2026/06/08.
-//
-
 import ActivityKit
 import WidgetKit
 import SwiftUI
 
 struct BeastLocatorWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
-        var emoji: String
+        var distanceText: String
+        var directionText: String
     }
 
-    // Fixed non-changing properties about your activity go here!
     var name: String
 }
 
 struct BeastLocatorWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: BeastLocatorWidgetAttributes.self) { context in
-            // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello \(context.state.emoji)")
+            // Lock screen/banner UI
+            HStack(spacing: 16) {
+                Image("yjsnpi")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 48, height: 48)
+                    .background(Color.white.opacity(0.1))
+                    .cornerRadius(8)
+                
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(context.state.distanceText)
+                        .font(.title2)
+                        .fontWeight(.black)
+                        .foregroundColor(.white)
+                    
+                    if !context.state.directionText.isEmpty {
+                        Text(context.state.directionText)
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.7))
+                    }
+                }
+                Spacer()
             }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
+            .padding()
+            .activityBackgroundTint(Color(red: 10/255, green: 14/255, blue: 30/255))
+            .activitySystemActionForegroundColor(Color.white)
 
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
+                // Expanded UI
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Image("yjsnpi")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(6)
+                        .padding(.leading, 8)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    Text(context.state.distanceText)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.trailing, 8)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
-                    // more content
+                    if !context.state.directionText.isEmpty {
+                        Text(context.state.directionText)
+                            .font(.caption)
+                            .foregroundColor(.white.opacity(0.8))
+                    }
                 }
             } compactLeading: {
-                Text("L")
+                Image("yjsnpi")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                    .cornerRadius(4)
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                Text(context.state.distanceText)
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
             } minimal: {
-                Text(context.state.emoji)
+                Image("yjsnpi")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                    .cornerRadius(4)
             }
-            .widgetURL(URL(string: "http://www.apple.com"))
-            .keylineTint(Color.red)
+            .keylineTint(Color.cyan)
         }
     }
-}
-
-extension BeastLocatorWidgetAttributes {
-    fileprivate static var preview: BeastLocatorWidgetAttributes {
-        BeastLocatorWidgetAttributes(name: "World")
-    }
-}
-
-extension BeastLocatorWidgetAttributes.ContentState {
-    fileprivate static var smiley: BeastLocatorWidgetAttributes.ContentState {
-        BeastLocatorWidgetAttributes.ContentState(emoji: "😀")
-     }
-     
-     fileprivate static var starEyes: BeastLocatorWidgetAttributes.ContentState {
-         BeastLocatorWidgetAttributes.ContentState(emoji: "🤩")
-     }
-}
-
-#Preview("Notification", as: .content, using: BeastLocatorWidgetAttributes.preview) {
-   BeastLocatorWidgetLiveActivity()
-} contentStates: {
-    BeastLocatorWidgetAttributes.ContentState.smiley
-    BeastLocatorWidgetAttributes.ContentState.starEyes
 }

@@ -89,10 +89,17 @@
 			);
 			target = E21DEBA62FD679A700450BED /* BeastLocatorWidgetExtension */;
 		};
+		E21DEBC82FD7E9ED00450BED /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BeastLocatorWidgetLiveActivity.swift,
+			);
+			target = C45EF8C7F94846F697F953F7 /* BeastLocator-iOS */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E21DEBAD2FD679A700450BED /* BeastLocatorWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E21DEBBA2FD679A800450BED /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BeastLocatorWidget; sourceTree = "<group>"; };
+		E21DEBAD2FD679A700450BED /* BeastLocatorWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E21DEBC82FD7E9ED00450BED /* PBXFileSystemSynchronizedBuildFileExceptionSet */, E21DEBBA2FD679A800450BED /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BeastLocatorWidget; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */

@@ -2,6 +2,7 @@ import Foundation
 import CoreLocation
 import Combine
 import WidgetKit
+import ActivityKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
@@ -12,6 +13,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var headingDegrees: Double = 0.0
     @Published var currentLocation: CLLocationCoordinate2D?
     @Published var systemLocationServiceDisabled = false
+    @Published var currentActivity: Activity<BeastLocatorWidgetAttributes>?
     @Published var waitingForLocation = true {
         didSet {
             if waitingForLocation {
@@ -121,6 +123,16 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         updateApproachLiveUpdate(distanceMeters: distance)
         handleSoundTriggers(distanceMeters: distance)
         updateWidgetData(distanceMeters: distance, bearing: bearing)
+        
+        let distanceStr = GeoUtils.shared.formatDistance(distance)
+        let cardinal = GeoUtils.shared.cardinalFromBearing(bearing)
+        let directionStr = String(format: NSLocalizedString("direction_label", comment: ""), cardinal)
+        
+        if store.destinationAnswered {
+            endLiveActivity()
+        } else {
+            updateLiveActivity(distanceText: distanceStr, directionText: directionStr)
+        }
         
         previousDistanceMeters = distance
     }
@@ -297,5 +309,60 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         prefs.set(0.0, forKey: "widget_rotation_degrees")
         
         WidgetCenter.shared.reloadAllTimelines()
+        
+        endLiveActivity()
+    }
+    
+    // MARK: - Live Activity Management
+    
+    func startLiveActivity(distanceText: String, directionText: String) {
+        guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+        guard currentActivity == nil else { return }
+        
+        let attributes = BeastLocatorWidgetAttributes(name: "BeastLocator")
+        let initialContentState = BeastLocatorWidgetAttributes.ContentState(
+            distanceText: distanceText,
+            directionText: directionText
+        )
+        
+        do {
+            let content = ActivityContent(state: initialContentState, staleDate: nil)
+            currentActivity = try Activity<BeastLocatorWidgetAttributes>.request(
+                attributes: attributes,
+                content: content
+            )
+        } catch {
+            print("Failed to start Live Activity: \(error.localizedDescription)")
+        }
+    }
+    
+    func updateLiveActivity(distanceText: String, directionText: String) {
+        guard let activity = currentActivity else {
+            startLiveActivity(distanceText: distanceText, directionText: directionText)
+            return
+        }
+        
+        let state = BeastLocatorWidgetAttributes.ContentState(
+            distanceText: distanceText,
+            directionText: directionText
+        )
+        
+        Task {
+            await activity.update(ActivityContent(state: state, staleDate: nil))
+        }
+    }
+    
+    func endLiveActivity() {
+        guard let activity = currentActivity else { return }
+        
+        let state = BeastLocatorWidgetAttributes.ContentState(
+            distanceText: store.destinationAnswered ? "到着" : "--",
+            directionText: ""
+        )
+        
+        Task {
+            await activity.end(ActivityContent(state: state, staleDate: nil), dismissalPolicy: .default)
+            self.currentActivity = nil
+        }
     }
 }

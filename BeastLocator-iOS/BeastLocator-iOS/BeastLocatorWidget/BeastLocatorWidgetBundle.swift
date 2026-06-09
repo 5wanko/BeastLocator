@@ -13,5 +13,6 @@ struct BeastLocatorWidgetBundle: WidgetBundle {
     var body: some Widget {
         BeastLocatorWidget()
         BeastLocatorWidgetControl()
+        BeastLocatorWidgetLiveActivity()
     }
 }
